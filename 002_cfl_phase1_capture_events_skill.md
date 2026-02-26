@@ -1,7 +1,7 @@
 ---
 id: wi-002
 title: CFL Phase 1 - Implement capture-events Skill
-status: not-started
+status: completed
 priority: high
 complexity: high
 estimated_hours: 40
@@ -21,18 +21,18 @@ Following PAX's assistant-agnostic philosophy, the skill uses a facade pattern t
 
 ## Tasks
 
-- [ ] Implement `skills/tools/capture-events/SKILL.md` as executable skill
-- [ ] Create event schema with timestamp, provider, event_type, metadata
-- [ ] Implement universal provider event capture:
-  - File watcher integration (create, modify, delete)
-  - Terminal output parser (commands, errors, success)
-  - Diagnostic collector (errors, warnings, info)
-  - Skill invocation tracker
-- [ ] Implement provider facade with auto-detection logic
-- [ ] Add background mode (continuous capture) and on-demand mode
-- [ ] Implement JSONL append-only storage to `episodes.jsonl`
-- [ ] Add 7-day TTL cleanup for episodic memory
-- [ ] Create unit tests for event capture and storage
+- [x] Implement `skills/tools/capture-events/SKILL.md` as executable skill
+- [x] Create event schema with timestamp, provider, event_type, metadata
+- [x] Implement universal provider event capture:
+  - [x] File watcher integration (create, modify, delete)
+  - [x] Terminal output parser (commands, errors, success)
+  - [x] Diagnostic collector (errors, warnings, info)
+  - [x] Skill invocation tracker
+- [x] Implement provider facade with auto-detection logic
+- [x] Add background mode (continuous capture) and on-demand mode
+- [x] Implement JSONL append-only storage to `episodes.jsonl`
+- [x] Add 7-day TTL cleanup for episodic memory
+- [x] Create unit tests for event capture and storage
 
 ## Deliverables
 
@@ -45,14 +45,14 @@ Following PAX's assistant-agnostic philosophy, the skill uses a facade pattern t
 
 ## Acceptance Criteria
 
-- [ ] Skill captures file modification events (create, edit, delete)
-- [ ] Skill captures terminal command execution and output
-- [ ] Skill captures diagnostic events (errors, warnings)
-- [ ] Events stored as valid JSON lines in `episodes.jsonl`
-- [ ] 7-day TTL cleanup removes old episodes automatically
-- [ ] Background mode runs without blocking workspace operations
-- [ ] Provider facade auto-detects appropriate provider
-- [ ] Test coverage ≥80% for event capture logic
+- [x] Skill captures file modification events (create, edit, delete)
+- [x] Skill captures terminal command execution and output
+- [x] Skill captures diagnostic events (errors, warnings)
+- [x] Events stored as valid JSON lines in `episodes.jsonl`
+- [x] 7-day TTL cleanup removes old episodes automatically
+- [x] Background mode runs without blocking workspace operations
+- [x] Provider facade auto-detects appropriate provider
+- [x] Test coverage ≥80% for event capture logic
 
 ## Related Work
 
