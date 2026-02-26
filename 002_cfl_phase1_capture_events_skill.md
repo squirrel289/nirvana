@@ -1,22 +1,24 @@
 ---
 id: wi-002
 title: CFL Phase 1 - Implement capture-events Skill
+type: work-item
+subtype: task
+lifecycle: active
 status: closed
 status_reason: completed
 priority: high
-created: 2026-02-26
 estimated: 40
-assignee: ''
-test_results:
-  - timestamp: 2026-02-26T08:00.000Z
-    note: '54 unit tests: ALL PASSED ✅'
 actual: 2
 completed_date: 2026-02-24
+assignee: ""
+test_results:
+  - timestamp: 2026-02-26T08:00:00.000Z
+    note: "54 unit tests: ALL PASSED ✅"
 commits:
-  - babe358: "feat: implement capture-events skill (wi-002)"
+  babe358: "feat: implement capture-events skill (wi-002)"
 links:
   depends_on:
-    - "[[001_cfl_phase0_extension_scaffolding]]
+    - "[[001_cfl_phase0_extension_scaffolding]]"
   pull_requests:
     - "https://github.com/templjs/templ.js/pull/1"
 ---

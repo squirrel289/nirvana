@@ -1,12 +1,15 @@
 ---
 id: wi-008
 title: CFL Phase 4 - Implement Efficiency Metrics
-status: not-started
-priority: medium
-complexity: medium
-estimated_hours: 28
-dependencies: [wi-004]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 28
+links:
+  depends_on:
+    - "[[wi-004]]"
 ---
 
 ## Goal

@@ -1,12 +1,15 @@
 ---
 id: wi-011
 title: CFL Phase 5 - Signal Promotion and Retirement Workflow
-status: not-started
-priority: medium
-complexity: medium
-estimated_hours: 32
-dependencies: [wi-010]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 32
+links:
+  depends_on:
+    - "[[wi-010]]"
 ---
 
 ## Goal

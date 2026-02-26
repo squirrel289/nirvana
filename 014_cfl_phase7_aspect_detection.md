@@ -1,12 +1,15 @@
 ---
 id: wi-014
 title: CFL Phase 7 - Aspect Usage Pattern Detection
-status: not-started
-priority: low
-complexity: medium
-estimated_hours: 20
-dependencies: [wi-004]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 20
+links:
+  depends_on:
+    - "[[wi-004]]"
 ---
 
 ## Goal

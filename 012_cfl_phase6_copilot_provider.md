@@ -1,12 +1,15 @@
 ---
 id: wi-012
 title: CFL Phase 6 - Implement GitHub Copilot Provider
-status: not-started
-priority: low
-complexity: medium
-estimated_hours: 24
-dependencies: [wi-001]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 24
+links:
+  depends_on:
+    - "[[wi-001]]"
 ---
 
 ## Goal

@@ -1,12 +1,15 @@
 ---
 id: wi-003
 title: CFL Phase 1 - Implement Memory Layer with Pattern Detection
-status: not-started
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
 priority: high
-complexity: high
-estimated_hours: 40
-dependencies: [wi-002]
-created: 2026-02-26
+estimated: 40
+links:
+  depends_on:
+    - "[[wi-002]]"
 ---
 
 ## Goal

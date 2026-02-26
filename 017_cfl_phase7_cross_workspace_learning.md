@@ -1,12 +1,15 @@
 ---
 id: wi-017
 title: CFL Phase 7 - Research Cross-Workspace Pattern Sharing
-status: not-started
-priority: low
-complexity: spike
-estimated_hours: 12
-dependencies: [wi-011]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 12
+links:
+  depends_on:
+    - "[[wi-011]]"
 ---
 
 ## Goal

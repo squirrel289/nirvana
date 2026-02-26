@@ -1,12 +1,22 @@
 ---
 id: wi-001
 title: CFL Phase 0 - Extension Scaffolding and Provider Infrastructure
-status: completed
+type: work-item
+subtype: task
+lifecycle: active
+status: closed
+status_reason: completed
 priority: high
 complexity: medium
-estimated_hours: 32
-dependencies: []
-created: 2026-02-26
+estimated: 32
+actual: 2
+completed_date: 2026-02-26
+links:
+  pull_requests:
+    - "https://github.com/templjs/templ.js/pull/1"
+test_results:
+  - timestamp: 2026-02-26T07:00:00.000Z
+    note: "No testable code"
 ---
 
 ## Goal

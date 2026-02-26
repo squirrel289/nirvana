@@ -1,12 +1,15 @@
 ---
 id: wi-005
 title: CFL Phase 2 - Integrate with skill-creator Delegation
-status: not-started
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
 priority: high
-complexity: medium
-estimated_hours: 24
-dependencies: [wi-004]
-created: 2026-02-26
+estimated: 24
+links:
+  depends_on:
+    - "[[wi-004]]"
 ---
 
 ## Goal

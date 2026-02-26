@@ -1,12 +1,15 @@
 ---
 id: wi-015
 title: CFL Phase 7 - Batch Analysis Mode for Historical Data
-status: not-started
-priority: low
-complexity: medium
-estimated_hours: 24
-dependencies: [wi-003]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 24
+links:
+  depends_on:
+    - "[[wi-003]]"
 ---
 
 ## Goal

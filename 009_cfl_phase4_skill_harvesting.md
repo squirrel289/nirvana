@@ -1,12 +1,15 @@
 ---
 id: wi-009
 title: CFL Phase 4 - Frequency-Weighted Skill Harvesting
-status: not-started
-priority: medium
-complexity: medium
-estimated_hours: 20
-dependencies: [wi-008]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 20
+links:
+  depends_on:
+    - "[[wi-008]]"
 ---
 
 ## Goal

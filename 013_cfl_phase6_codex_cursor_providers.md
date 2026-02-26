@@ -1,12 +1,16 @@
 ---
 id: wi-013
 title: CFL Phase 6 - Implement Codex and Cursor Providers
-status: not-started
-priority: low
-complexity: high
-estimated_hours: 48
-dependencies: [wi-001, wi-012]
-created: 2026-02-26
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
+priority: high
+estimated: 48
+links:
+  depends_on:
+    - "[[wi-001]]"
+    - "[[wi-012]]"
 ---
 
 ## Goal

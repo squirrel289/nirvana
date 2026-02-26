@@ -1,12 +1,15 @@
 ---
 id: wi-004
 title: CFL Phase 2 - Implement creating-skill Workflow
-status: not-started
+type: work-item
+subtype: task
+lifecycle: active
+status: ready
 priority: high
-complexity: high
-estimated_hours: 36
-dependencies: [wi-003]
-created: 2026-02-26
+estimated: 36
+links:
+  depends_on:
+    - "[[wi-003]]"
 ---
 
 ## Goal
