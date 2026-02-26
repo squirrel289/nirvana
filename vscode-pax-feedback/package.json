@@ -1,0 +1,78 @@
+{
+  "name": "vscode-pax-feedback",
+  "displayName": "PAX Continuous Feedback",
+  "description": "Captures workspace events for PAX skills evolution and pattern detection",
+  "version": "0.1.0",
+  "publisher": "pax",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "pax",
+    "skills",
+    "feedback",
+    "pattern-detection",
+    "evolution"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "PAX Feedback",
+      "properties": {
+        "pax.feedback.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable continuous feedback loop event capture"
+        },
+        "pax.feedback.provider": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "universal",
+            "copilot",
+            "codex",
+            "cursor"
+          ],
+          "default": "auto",
+          "description": "Provider for event capture (auto-detect recommended)"
+        },
+        "pax.feedback.captureInterval": {
+          "type": "number",
+          "default": 5000,
+          "description": "Interval (ms) for background event capture"
+        },
+        "pax.feedback.storagePath": {
+          "type": "string",
+          "default": ".vscode/pax-memory",
+          "description": "Relative path for local memory storage"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "test": "node ./dist/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.22.0",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/squirrel289/pax.git",
+    "directory": "vscode-pax-feedback"
+  }
+}

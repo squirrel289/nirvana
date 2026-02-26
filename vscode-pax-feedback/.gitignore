@@ -1,0 +1,12 @@
+# VS Code Extension files
+node_modules/
+dist/
+*.vsix
+
+# Build outputs
+out/
+.vscode-test/
+
+# Development
+.DS_Store
+*.log
