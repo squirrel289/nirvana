@@ -19,6 +19,16 @@ The memory layer is the analysis engine of the CFL. It processes raw events from
 
 ## Tasks
 
+- [ ] Select persistent store(s)
+  - Identify options. Seed with below and consider other options.
+    - Avancedb + couchdb
+    - PostgreSQL + pgvector
+    - PostgreSQL (structured) + Redis (cache) + Qdrant (vectors)
+    - Qdrant
+    - FAISS
+    - FalkorDB
+    - Neo4j
+    - Raw files
 - [ ] Implement episodic memory tier (7-day TTL, JSONL storage)
 - [ ] Implement semantic memory tier (30-day TTL, pattern aggregation)
 - [ ] Implement procedural memory tier (permanent skill proposals)
@@ -34,16 +44,18 @@ The memory layer is the analysis engine of the CFL. It processes raw events from
 
 ## Deliverables
 
-1. Memory layer implementation in `vscode-pax-feedback/src/memory/`
-2. Pattern detection algorithms (frequency, temporal, signal-based)
-3. Three-tier memory architecture with TTL management
-4. Pattern storage in `patterns.json`
-5. Signal catalog integration
-6. Background analysis scheduler
-7. Test suite for pattern detection accuracy
+1. Capture considered and selected persistent storage options in an `architecture-decision-record`
+2. Memory layer implementation in `vscode-pax-feedback/src/memory/`
+3. Pattern detection algorithms (frequency, temporal, signal-based)
+4. Three-tier memory architecture with TTL management
+5. Pattern storage in `patterns.json`
+6. Signal catalog integration
+7. Background analysis scheduler
+8. Test suite for pattern detection accuracy
 
 ## Acceptance Criteria
 
+- [ ] Architecure decision record created
 - [ ] Episodic memory stores events with 7-day TTL
 - [ ] Semantic memory aggregates patterns with 30-day TTL
 - [ ] Procedural memory persists skill proposals indefinitely
