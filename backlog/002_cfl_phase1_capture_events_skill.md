@@ -18,7 +18,7 @@ commits:
   babe358: "feat: implement capture-events skill (wi-002)"
 links:
   depends_on:
-    - "[[001_cfl_phase0_extension_scaffolding]]"
+    - "[[wi-001]]"
   pull_requests:
     - "https://github.com/templjs/templ.js/pull/1"
 ---

@@ -9,6 +9,7 @@ priority: high
 estimated: 20
 links:
   depends_on:
+    - "[[wi-003]]"
     - "[[wi-004]]"
 ---
 
