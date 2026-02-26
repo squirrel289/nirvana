@@ -1,0 +1,61 @@
+---
+id: wi-003
+title: CFL Phase 1 - Implement Memory Layer with Pattern Detection
+status: not-started
+priority: high
+complexity: high
+estimated_hours: 40
+dependencies: [wi-002]
+created: 2026-02-26
+---
+
+## Goal
+
+Implement the memory layer that transforms episodic events into patterns, organized across three tiers: episodic (7-day), semantic (30-day), and procedural (permanent proposals).
+
+## Background
+
+The memory layer is the analysis engine of the CFL. It processes raw events from `episodes.jsonl` to detect patterns through frequency analysis, temporal clustering, and signal matching against the evolving signal catalog.
+
+## Tasks
+
+- [ ] Implement episodic memory tier (7-day TTL, JSONL storage)
+- [ ] Implement semantic memory tier (30-day TTL, pattern aggregation)
+- [ ] Implement procedural memory tier (permanent skill proposals)
+- [ ] Create pattern detection engine:
+  - Frequency analysis (repeated sequences)
+  - Temporal clustering (time-based grouping)
+  - Signal catalog matching
+- [ ] Implement pattern schema with metadata (frequency, last_seen, confidence)
+- [ ] Add pattern storage to `patterns.json` with versioning
+- [ ] Create signal catalog loader from `signals.json`
+- [ ] Implement background pattern analysis on idle
+- [ ] Add memory compaction/cleanup workflows
+
+## Deliverables
+
+1. Memory layer implementation in `vscode-pax-feedback/src/memory/`
+2. Pattern detection algorithms (frequency, temporal, signal-based)
+3. Three-tier memory architecture with TTL management
+4. Pattern storage in `patterns.json`
+5. Signal catalog integration
+6. Background analysis scheduler
+7. Test suite for pattern detection accuracy
+
+## Acceptance Criteria
+
+- [ ] Episodic memory stores events with 7-day TTL
+- [ ] Semantic memory aggregates patterns with 30-day TTL
+- [ ] Procedural memory persists skill proposals indefinitely
+- [ ] Pattern detection identifies repeated sequences (≥3 occurrences)
+- [ ] Temporal clustering groups related events within time windows
+- [ ] Signal catalog matching identifies known patterns
+- [ ] Patterns stored with confidence scores and metadata
+- [ ] Background analysis runs during idle periods (no blocking)
+- [ ] Test coverage ≥75% for pattern detection logic
+
+## Related Work
+
+- See: [[docs/architecture/continuous-feedback-loop.md]] - Memory architecture
+- See: [[002_cfl_phase1_capture_events_skill]] - Event capture dependency
+- Reference: `pax/evolution` for signal catalog examples
