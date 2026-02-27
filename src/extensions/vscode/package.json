@@ -73,6 +73,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/squirrel289/pax.git",
-    "directory": "vscode-pax-feedback"
+    "directory": "src/extensions/vscode"
   }
 }

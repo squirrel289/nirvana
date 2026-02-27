@@ -2,6 +2,10 @@
   "name": "pax",
   "version": "1.0.0",
   "description": "",
+  "workspaces": [
+    "src/packages/*",
+    "src/extensions/*"
+  ],
   "type": "module",
   "main": "index.js",
   "scripts": {

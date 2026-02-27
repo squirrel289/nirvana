@@ -10,7 +10,7 @@ Phased implementation roadmap for the Nirvana Continuous Feedback Loop (CFL), or
 
 ## Overview
 
-This plan decomposes the [Continuous Feedback Loop Architecture](../../nirvana/architecture/continuous-feedback-loop.md) into concrete, actionable work items organized by phased milestones. Nirvana is treated as the optimization control plane that identifies efficacy opportunities, enforces efficiency constraints (token/context/request/time), and governs ROI tracking across all supported channels.
+This plan decomposes the [Continuous Feedback Loop Architecture](../architecture/continuous-feedback-loop.md) into concrete, actionable work items organized by phased milestones. Nirvana is treated as the optimization control plane that identifies efficacy opportunities, enforces efficiency constraints (token/context/request/time), and governs ROI tracking across all supported channels.
 
 **Total Estimated Effort**: 344+ hours across 17 work items
 
@@ -338,7 +338,7 @@ Core KPI set (MVP required, extensible long-term):
 
 ## Configuration & Settings
 
-Default configuration in `vscode-pax-feedback/package.json`:
+Default configuration in `src/extensions/vscode/package.json`:
 
 ```json
 {
@@ -405,7 +405,7 @@ Each phase includes:
 
 ## Related Documentation
 
-- [Continuous Feedback Loop Architecture](../../nirvana/architecture/continuous-feedback-loop.md)
+- [Continuous Feedback Loop Architecture](../architecture/continuous-feedback-loop.md)
 - [Capture Events Skill](../skills/tools/capture-events/SKILL.md)
 - [Creating Skill Workflow](../skills/workflow/creating-skill/SKILL.md)
 - [Work Management Integration](WORK_MANAGEMENT_INTEGRATION.md)

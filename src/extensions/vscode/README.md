@@ -46,5 +46,5 @@ See VS Code settings under "PAX Feedback" for:
 
 ## Related Documentation
 
-- [Continuous Feedback Loop Architecture](../docs/architecture/continuous-feedback-loop.md)
+- [Continuous Feedback Loop Architecture](../../../docs/architecture/continuous-feedback-loop.md)
 - [Capture Events Skill](../skills/tools/capture-events/SKILL.md)
