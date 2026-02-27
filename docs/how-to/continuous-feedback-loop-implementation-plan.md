@@ -6,21 +6,67 @@ created: 2026-02-26
 audience: PAX contributors
 ---
 
-Phased implementation roadmap for the PAX Continuous Feedback Loop (CFL), organized by milestones from MVP baseline through advanced features.
+Phased implementation roadmap for the Nirvana Continuous Feedback Loop (CFL), organized by milestones from MVP baseline through advanced features.
 
 ## Overview
 
-This plan decomposes the [Continuous Feedback Loop Architecture](architecture/continuous-feedback-loop.md) into concrete, actionable work items organized by phased milestones. Each phase builds upon the previous, with clear dependencies and incremental value delivery.
+This plan decomposes the [Continuous Feedback Loop Architecture](../../nirvana/architecture/continuous-feedback-loop.md) into concrete, actionable work items organized by phased milestones. Nirvana is treated as the optimization control plane that identifies efficacy opportunities, enforces efficiency constraints (token/context/request/time), and governs ROI tracking across all supported channels.
 
 **Total Estimated Effort**: 344+ hours across 17 work items
 
+## Nirvana Optimization Mandate
+
+Each phase must preserve these non-negotiable outcomes:
+
+1. Identify high-leverage opportunities to improve end-to-end efficacy.
+2. Optimize token usage, context usage, request count, and elapsed time.
+3. Forecast ROI before rollout, then track realized ROI against baseline.
+4. Track proposal acceptance frequency and post-promotion usage frequency.
+5. Ensure recommendation quality across all input/output channel classes and model cohorts.
+
+## Terminology (Industry-Aligned)
+
+This plan uses the same terminology as the architecture document:
+
+- `assistant_provider`: Integration surface/provider adapter (for example `codex`, `copilot`, `cursor`).
+- `model_provider`: Model vendor/company (for example `openai`, `anthropic`, `google`).
+- `model_family`: Model class/product line (for example `gpt-5`, `claude-sonnet`).
+- `model_version`: Specific pinned release/revision when available.
+- `model_id`: Runtime model identifier from provider APIs.
+- `model_cohort`: Derived analytics group for optimization and KPI segmentation.
+
+`model_cohort` is intentionally derived; it complements standard identifiers rather than replacing them.
+
 ## Milestone Progression
 
-- **MVP Baseline** (Phase 0-2): 108 hours → Functional feedback loop
-- **Production Ready** (Phase 3-4): +52 hours = 160 hours → Integration + efficiency
-- **Complete Loop** (Phase 5): +32 hours = 192 hours → Self-improving signals
-- **Multi-Assistant** (Phase 6): +72 hours = 264 hours → Full provider support
-- **Advanced Features** (Phase 7): +80 hours = 344+ hours → Future enhancements
+- **MVP** (Phase 0-2): 108 hours → Lightweight default + VS Code extension + Codex/Copilot Chat coverage
+- **Short-term** (Phase 3-5): +84 hours = 192 hours → External AgeMem support + inline editor support + Nirvana dogfooding phase 1
+- **Mid-term** (Phase 6): +72 hours = 264 hours → CLI/cloud enablement + seamless external AgeMem alternative
+- **Long-term** (Phase 7): +80 hours = 344+ hours → Dynamic/extensible KPI framework + adjacent-market expansion options
+
+## Channel Coverage Requirements
+
+**Input channels (must be measurable and comparable):**
+
+- CLI (Claude, Copilot, Codex, and similar)
+- IDEs (JetBrains, VS Code, Cursor, Claude Code, and similar)
+- Extensions (Kilo Code, GitHub Copilot, Codex, Roo, and similar)
+- Inline editors (VS Code editor, Vim, Emacs, and similar)
+- External assistants (OpenClaw, Gemini Code Assistant, Copilot code reviewer, and similar)
+
+**Output channels (must remain portable):**
+
+- Lightweight local-first execution (default)
+- Existing external AgeMem services (local or remote)
+
+**Model coverage policy (must be measurable and comparable):**
+
+- Track `model_id` (or normalized cohort when exact IDs are unavailable) for assistant-originated events
+- Maintain per-model baselines and forecast/realized ROI comparisons
+- Require cross-model validation before promoting globally-scoped optimizations
+
+Every optimization recommendation must include cross-channel impact evidence instead of single-assistant-provider evidence only.
+Every optimization recommendation must also include per-model impact evidence for the model cohorts where it is expected to apply.
 
 ## Phase 0: Extension Scaffolding (32 hours)
 
@@ -28,11 +74,12 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 
 **Work Items**:
 
-- [[001_cfl_phase0_extension_scaffolding]] - Extension scaffolding and provider infrastructure (32h)
+- [[001_cfl_phase0_extension_scaffolding]] - Extension scaffolding and assistant-provider infrastructure (32h)
 
 **Deliverables**:
 
 - VS Code extension with universal provider
+- Codex and Copilot Chat capture stubs in VS Code integration surface
 - Provider facade pattern implementation
 - Local storage infrastructure (`.vscode/pax-memory/`)
 
@@ -53,10 +100,12 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 
 **Deliverables**:
 
-- `capture-events` skill with provider adapters
+- `capture-events` skill with assistant-provider adapters
 - JSONL episodic storage with 7-day TTL
 - Pattern detection from episode frequency analysis
 - Semantic memory tier with 30-day TTL
+- Baseline snapshot capture for token/context/request/time by channel
+- Baseline snapshot capture for token/context/request/time by model cohort
 
 **Dependencies**: Phase 0 complete
 
@@ -79,6 +128,9 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 - Hybrid routing matrix (enhance/create-pax/create-project/aspect/agents)
 - Confidence scoring for recommendations
 - skill-creator delegation with proposal storage
+- Efficacy-opportunity classification (quality lift, acceptance lift, defect reduction)
+- Cross-channel recommendation scoring constraints (not single-assistant-provider only)
+- Per-model recommendation scoring constraints (not single-model only)
 
 **Dependencies**: Phase 1 complete
 
@@ -100,6 +152,8 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 - Automatic proposal triggers on work item state transitions
 - PR feedback event capture
 - Integration with [[WORK_MANAGEMENT_INTEGRATION.md]]
+- Inline editor event ingestion path (VS Code editor/Vim/Emacs style flows)
+- Nirvana dogfooding phase 1 instrumentation hooks
 
 **Dependencies**: Phase 2 complete
 
@@ -109,7 +163,7 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 
 ## Phase 4: Efficiency Optimization (48 hours)
 
-**Goal**: Add efficiency metrics and ROI-based prioritization
+**Goal**: Add efficiency metrics, ROI forecasting, and portability outputs
 
 **Work Items**:
 
@@ -120,8 +174,11 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 
 - LLM call counters, execution time tracking, context overhead measurement
 - ROI calculation: (time_saved × frequency) / creation_cost
+- Forecast vs realized ROI tracking against baseline windows (7/30/90 days)
+- Forecast vs realized ROI segmented by channel and model cohort
 - Skill harvesting recommendations ranked by efficiency
 - Progressive disclosure (summary/detail/evidence tiers)
+- External AgeMem output bridge (local/remote) with local-first fallback
 
 **Dependencies**: Phase 2 complete
 
@@ -142,9 +199,14 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 
 - Signal performance metrics (precision, recall, false positive rate)
 - Human validation capture (accept/reject/modify)
+- Proposal acceptance frequency tracking by channel
+- Post-promotion usage frequency tracking by channel
+- Proposal acceptance frequency tracking by model cohort
+- Post-promotion usage frequency tracking by model cohort
 - Signal promotion from candidate → validated → proven
 - Retirement criteria for low-performing signals
 - Evolving signal catalog in `signals.json`
+- Nirvana dogfooding phase 1 review loop and scoring recalibration
 
 **Dependencies**: Phase 3-4 complete
 
@@ -154,7 +216,7 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 
 ## Phase 6: Extended Provider Support (72 hours)
 
-**Goal**: Full multi-assistant compatibility
+**Goal**: Full multi-assistant compatibility with CLI/cloud enablement
 
 **Work Items**:
 
@@ -166,8 +228,12 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 - Copilot extension integration
 - Codex API adapter
 - Cursor extension integration
+- CLI adapters for Codex/Copilot/Claude-style workflows
+- Cloud deployment profile for hosted analysis and optional remote storage
 - Provider auto-detection logic
-- Provider-specific optimization
+- Assistant-provider-specific optimization
+- Model cohort tracking and per-model optimization profiles
+- Seamless local-first ↔ external AgeMem routing without workflow disruption
 
 **Dependencies**: Phase 0 complete (can run in parallel with Phase 1-5)
 
@@ -192,6 +258,8 @@ This plan decomposes the [Continuous Feedback Loop Architecture](architecture/co
 - Batch analysis for existing repositories
 - VS Code webview dashboard for insights
 - Research spike: Privacy-preserving cross-workspace learning
+- Adjustable/dynamic/extensible KPI framework (custom KPI registration + weighting)
+- AgeMem-backed expansion hypotheses for adjacent product and market opportunities
 
 **Dependencies**: Phase 5 complete
 
@@ -212,9 +280,12 @@ Phases 4 and 6 can run in parallel with the critical path.
 After completing Phase 2, the system delivers:
 
 - ✅ Event capture across workspace signals
+- ✅ VS Code extension path with Codex/Copilot Chat coverage
 - ✅ Pattern detection from episodic memory
 - ✅ Skill recommendations with confidence scoring
 - ✅ skill-creator delegation for approved proposals
+- ✅ Baseline capture for token/context/request/time metrics
+- ✅ Baseline capture segmented by channel and model cohort
 
 **Decision Point**: Validate MVP with real-world usage before proceeding to production features.
 
@@ -226,8 +297,10 @@ After completing Phase 4, the system adds:
 - ✅ PR feedback capture
 - ✅ Efficiency-based prioritization
 - ✅ ROI metrics for skill value
+- ✅ External AgeMem bridge (local/remote) with local-first fallback
+- ✅ Inline editor channel support
 
-**Decision Point**: Evaluate efficiency improvements before investing in multi-provider support.
+**Decision Point**: Evaluate efficiency improvements before investing in broader assistant-provider support.
 
 ### Evolution Checkpoint (Phase 5)
 
@@ -236,8 +309,32 @@ After completing Phase 5, the system becomes:
 - ✅ Self-improving through signal validation
 - ✅ Learning-oriented with performance tracking
 - ✅ Continuously refining pattern detection
+- ✅ Dogfooding-informed scoring adjustments
+- ✅ Acceptance and usage frequency integrated into ranking
+- ✅ Per-model performance deltas integrated into ranking
 
 **Decision Point**: Assess signal evolution effectiveness before expanding scope.
+
+## KPI Baseline & ROI Governance
+
+Nirvana requires every proposal to include:
+
+1. **Baseline snapshot**: Pre-change values for token/context/request/time, split by channel class and model cohort.
+2. **Forecast model**: Expected ROI and expected efficacy lift before promotion.
+3. **Realized tracking**: 7/30/90-day measurements after promotion.
+4. **Adoption evidence**: Proposal acceptance frequency and post-promotion usage frequency, segmented by channel and model.
+5. **Quality evidence**: Downstream acceptance/rework/defect trends relative to baseline.
+
+Core KPI set (MVP required, extensible long-term):
+
+- token efficiency
+- context utilization efficiency
+- request efficiency
+- elapsed-time efficiency
+- proposal acceptance frequency
+- promoted-change usage frequency
+- per-model efficiency and quality deltas
+- quality lift indicators (for example review acceptance improvement)
 
 ## Configuration & Settings
 
@@ -252,13 +349,15 @@ Default configuration in `vscode-pax-feedback/package.json`:
 }
 ```
 
+`pax.feedback.provider` configures assistant-provider adapter routing; model vendor is tracked separately as `model_provider`.
+
 Override per-workspace in `.vscode/settings.json`.
 
 ## Testing Strategy
 
 Each phase includes:
 
-- **Unit tests**: Individual components (providers, storage, analyzers)
+- **Unit tests**: Individual components (assistant providers, storage, analyzers)
 - **Integration tests**: End-to-end workflows (capture → analyze → recommend)
 - **Manual validation**: Real-world usage with PAX development
 - **Performance tests**: Memory overhead, disk I/O, latency
@@ -269,15 +368,21 @@ Each phase includes:
 
 - Extension activates without errors
 - Captures 10+ event types
+- Captures Codex/Copilot Chat interactions in VS Code path
 - Detects 3+ pattern types
 - Generates 1+ recommendation per day
+- Baseline metrics recorded for token/context/request/time on 90%+ of sessions
+- Baseline metrics include model_id/model cohort on 90%+ of captured assistant sessions
 
 ### Production Success (Phase 3-4)
 
 - Work item completion triggers recommendations
 - PR feedback captured and analyzed
 - Efficiency ROI calculated for all recommendations
+- ROI forecast generated before promotion for 95%+ of recommendations
+- ROI forecast segmented by model cohort for 90%+ of model-targeted recommendations
 - 80%+ of high-ROI recommendations accepted
+- External AgeMem output bridge operational with local-first fallback
 
 ### Evolution Success (Phase 5)
 
@@ -285,20 +390,28 @@ Each phase includes:
 - 3+ signals promoted to "proven" status
 - 1+ low-performing signal retired
 - Precision improves by 15%+
+- Proposal acceptance frequency and usage frequency captured per channel
+- Proposal acceptance frequency and usage frequency captured per model cohort
+- Forecast vs realized ROI error converges within ±20%
 
 ### Multi-Assistant Success (Phase 6)
 
 - Works with 3+ AI assistants
 - Provider auto-detection 95%+ accurate
-- Provider-specific optimizations validated
+- Assistant-provider-specific optimizations validated
+- Per-model optimization profiles validated for top model cohorts per provider
+- CLI and cloud profiles validated in production-like environments
+- Seamless switching between local-first and external AgeMem outputs
 
 ## Related Documentation
 
-- [Continuous Feedback Loop Architecture](architecture/continuous-feedback-loop.md)
+- [Continuous Feedback Loop Architecture](../../nirvana/architecture/continuous-feedback-loop.md)
 - [Capture Events Skill](../skills/tools/capture-events/SKILL.md)
 - [Creating Skill Workflow](../skills/workflow/creating-skill/SKILL.md)
 - [Work Management Integration](WORK_MANAGEMENT_INTEGRATION.md)
 
 ## Revision History
 
+- **2026-02-27**: Added explicit per-model optimization coverage (model-cohort baselines, scoring constraints, KPI segmentation, and success criteria)
+- **2026-02-27**: Reframed around Nirvana control-plane role; added cross-channel portability, KPI baseline/forecast governance, and phased MVP/short/mid/long rollout alignment
 - **2026-02-26**: Initial implementation plan (17 work items, 8 phases)
