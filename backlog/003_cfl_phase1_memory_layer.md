@@ -4,9 +4,19 @@ title: CFL Phase 1 - Implement Control Plane Memory Kernel and Composition Adapt
 type: work-item
 subtype: task
 lifecycle: active
-status: ready
+status: in-progress
 priority: high
 estimated: 40
+actual: 6
+assignee: ""
+test_results:
+  - timestamp: 2026-03-02T00:00:00.000Z
+    note: "pnpm test -- src/packages/core/src/memory/conformance.test.ts src/packages/core/src/memory/kernel.test.ts (11 passed)"
+  - timestamp: 2026-03-02T00:00:00.000Z
+    note: "pnpm test -- src/extensions/vscode/src/providers/universal.test.ts src/extensions/vscode/src/providers/facade.test.ts (5 passed)"
+notes:
+  - timestamp: 2026-03-02T00:00:00.000Z
+    note: "Started WI-003 implementation on branch feature/wi-003-memory-layer-exec. Delivered canonical memory provider contract, SQLite/Lance local adapters, shared conformance suite, and initial benchmark harness."
 links:
   depends_on:
     - "[[wi-001]]"
@@ -26,17 +36,17 @@ This item still avoids broad external multi-provider rollout; deeper hosted/comp
 
 ## Tasks
 
-- [ ] Implement MVP local-first memory kernel with required semantic retrieval behavior
+- [x] Implement MVP local-first memory kernel with required semantic retrieval behavior
   - Episodic tier (7-day TTL)
   - Semantic tier (30-day TTL)
   - Procedural/proposal tier
-- [ ] Define canonical memory provider interface for composed backends
+- [x] Define canonical memory provider interface for composed backends
   - Read/write contract for episodes, patterns, signals, and proposals
   - Semantic retrieval contract (embedding upsert/query, similarity threshold, top-k)
   - Capability metadata (ttl support, vector search, graph traversal)
-- [ ] Implement SQLite counterpart adapter for MVP memory contract
-- [ ] Implement LanceDB adapter for MVP memory contract
-- [ ] Implement contract/conformance test harness shared by SQLite and LanceDB adapters
+- [x] Implement SQLite counterpart adapter for MVP memory contract
+- [x] Implement LanceDB adapter for MVP memory contract
+- [x] Implement contract/conformance test harness shared by SQLite and LanceDB adapters
 - [ ] Implement A/B benchmark harness for SQLite counterpart vs LanceDB
   - Recall@k and ranking quality on seeded scenarios
   - Query latency (p50/p95)
@@ -49,7 +59,7 @@ This item still avoids broad external multi-provider rollout; deeper hosted/comp
   - Frequency analysis
   - Temporal clustering
   - Signal catalog matching
-- [ ] Add memory governance metadata
+- [x] Add memory governance metadata
   - Source backend
   - Confidence inputs
   - Retention and replay provenance
@@ -70,15 +80,15 @@ This item still avoids broad external multi-provider rollout; deeper hosted/comp
 ## Acceptance Criteria
 
 - [ ] Semantic retrieval is implemented and required in MVP workflows
-- [ ] SQLite counterpart and LanceDB both run fully local with no required external service
-- [ ] SQLite counterpart and LanceDB both pass canonical contract/conformance tests
+- [x] SQLite counterpart and LanceDB both run fully local with no required external service
+- [x] SQLite counterpart and LanceDB both pass canonical contract/conformance tests
 - [ ] A/B benchmark evidence is recorded for recall@k, latency, throughput, and footprint
 - [ ] MVP default backend behavior is selected and justified from benchmark evidence
 - [ ] Fallback path between SQLite counterpart and LanceDB is documented and testable
 - [ ] Pattern detection engine behavior is backend-agnostic
-- [ ] Retention policy is enforced across episodic, semantic, and procedural tiers
+- [x] Retention policy is enforced across episodic, semantic, and procedural tiers
 - [ ] MVP+1 migration and external backend implementation scope is explicitly deferred to [[027_cfl_mvp_plus1_external_composition_spike]]
-- [ ] Pattern metadata includes backend/source provenance for auditability
+- [x] Pattern metadata includes backend/source provenance for auditability
 - [ ] Test coverage >=75% for adapters, retrieval behavior, and detection logic
 
 ## Related Work
