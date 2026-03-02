@@ -22,6 +22,8 @@ links:
     - "[[wi-001]]"
     - "[[wi-002]]"
     - "[[wi-026]]"
+commits:
+  ba04afd: "feat(core): implement WI-003 memory contracts and local adapters"
 ---
 
 ## Goal
