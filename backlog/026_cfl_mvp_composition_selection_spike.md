@@ -4,7 +4,7 @@ title: CFL MVP Spike - Compose Local-First Tooling for the Control Plane
 type: work-item
 subtype: task
 lifecycle: active
-status: ready
+status: in-progress
 priority: high
 estimated: 20
 links:
@@ -25,27 +25,27 @@ This spike produces the evidence-backed tool selection and interface contracts f
 
 ## Tasks
 
-- [ ] Define the decision rubric (latency, local-first operation, portability, cost, operational burden, explainability)
-- [ ] Evaluate local-first memory options
+- [x] Define the decision rubric (latency, local-first operation, portability, cost, operational burden, explainability)
+- [x] Evaluate local-first memory options
   - Embedded baseline: JSONL + SQLite
   - LlamaIndex local storage/index options
   - Mem0/OpenMemory local mode
   - Zep/Graphiti self-hosted options
   - Additional candidates discovered during research
-- [ ] Evaluate orchestration/recommendation options
+- [x] Evaluate orchestration/recommendation options
   - Native control-plane orchestrator in-repo
   - LlamaIndex workflows/agents
   - CrewAI
   - LangGraph and similar frameworks
-- [ ] Evaluate observability/evaluation/cost options for local-first operation
+- [x] Evaluate observability/evaluation/cost options for local-first operation
   - Embedded telemetry and replay harness
   - OpenAI Evals API integration points
   - Arize Phoenix self-hosted
   - Langfuse self-hosted
   - Helicone and similar request/cost tracing options
-- [ ] Produce an MVP composition matrix with selected defaults and explicit non-goals
-- [ ] Capture decisions in ADRs and map decisions to implementation work items
-- [ ] Define explicit scope boundary:
+- [x] Produce an MVP composition matrix with selected defaults and explicit non-goals
+- [x] Capture decisions in ADRs and map decisions to implementation work items
+- [x] Define explicit scope boundary:
   - MVP implements selected local defaults + canonical contracts
   - MVP+1 handles external integrations and deeper multi-backend rollout
 
@@ -60,17 +60,23 @@ This spike produces the evidence-backed tool selection and interface contracts f
 
 ## Acceptance Criteria
 
-- [ ] At least 3 options evaluated per problem space with evidence links
-- [ ] LlamaIndex and CrewAI explicitly evaluated in scope
-- [ ] Selected MVP defaults run without mandatory external services
+- [x] At least 3 options evaluated per problem space with evidence links
+- [x] LlamaIndex and CrewAI explicitly evaluated in scope
+- [x] Selected MVP defaults run without mandatory external services
 - [ ] ADR set approved for memory, orchestration, and telemetry/evals composition
-- [ ] Implementation backlog updated to reflect selected composition boundaries
-- [ ] `wi-003` scope is narrowed to selected MVP defaults and contract tests only
-- [ ] Deferred external/multi-backend depth is linked to [[027_cfl_mvp_plus1_external_composition_spike]]
+- [x] Implementation backlog updated to reflect selected composition boundaries
+- [x] `wi-003` scope is narrowed to selected MVP defaults and contract tests only
+- [x] Deferred external/multi-backend depth is linked to [[027_cfl_mvp_plus1_external_composition_spike]]
 
 ## Related Work
 
 - See: [[docs/architecture/continuous-feedback-loop.md]] - Control plane scope
 - See: [[docs/how-to/continuous-feedback-loop-implementation-plan.md]] - MVP delivery model
+- See: [[docs/adr/cfl-adr-set-mvp-composition.md]] - ADR set definition and approval record
+- See: [[docs/how-to/cfl-mvp-composition-selection-matrix.md]] - MVP matrix and option evidence
+- See: [[docs/how-to/cfl-mvp-vs-mvp-plus1-scope-boundary.md]] - MVP/MVP+1 boundary note
+- See: [[docs/adr/cfl-adr-002-mvp-memory-composition.md]] - Memory decision
+- See: [[docs/adr/cfl-adr-003-mvp-orchestration-composition.md]] - Runtime decision
+- See: [[docs/adr/cfl-adr-004-mvp-telemetry-eval-cost-composition.md]] - Telemetry/eval/cost decision
 - See: [[003_cfl_phase1_memory_layer]] - Memory implementation dependency
 - See: [[027_cfl_mvp_plus1_external_composition_spike]] - MVP+1 external composition scope
