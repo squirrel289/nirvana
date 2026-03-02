@@ -12,6 +12,7 @@ links:
     - "[[wi-018]]"
     - "[[wi-012]]"
     - "[[wi-013]]"
+    - "[[wi-027]]"
 ---
 
 ## Goal
@@ -25,7 +26,7 @@ Phase 6 expands assistant-provider coverage and routing logic while preserving l
 ## Tasks
 
 - [ ] Verify all scoped Phase 6 work items are complete with evidence
-- [ ] Validate multi-provider deliverables and routing behavior
+- [ ] Validate multi-provider deliverables, external composition, and routing behavior
 - [ ] Record final milestone readiness decision
 
 ## Deliverables
@@ -43,3 +44,4 @@ Phase 6 expands assistant-provider coverage and routing logic while preserving l
 - See: [[docs/how-to/continuous-feedback-loop-implementation-plan.md]] - Phase 6 scope and deliverables
 - See: [[012_cfl_phase6_copilot_provider]] - Copilot provider
 - See: [[013_cfl_phase6_codex_cursor_providers]] - Codex and Cursor providers
+- See: [[027_cfl_mvp_plus1_external_composition_spike]] - MVP+1 external composition

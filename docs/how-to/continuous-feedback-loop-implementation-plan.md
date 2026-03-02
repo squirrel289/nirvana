@@ -6,13 +6,13 @@ created: 2026-02-26
 audience: PAX contributors
 ---
 
-Phased implementation roadmap for the Nirvana Continuous Feedback Loop (CFL), organized by milestones from MVP baseline through advanced features.
+Phased implementation roadmap for the Nirvana Continuous Feedback Loop (CFL), organized around a composition-first control-plane strategy from MVP through MVP+1.
 
 ## Overview
 
-This plan decomposes the [Continuous Feedback Loop Architecture](../architecture/continuous-feedback-loop.md) into concrete, actionable work items organized by phased milestones. Nirvana is treated as the optimization control plane that identifies efficacy opportunities, enforces efficiency constraints (token/context/request/time), and governs ROI tracking across all supported channels.
+This plan decomposes the [Continuous Feedback Loop Architecture](../architecture/continuous-feedback-loop.md) into concrete, actionable work items. Nirvana is the optimization control plane: it identifies efficacy opportunities, enforces efficiency constraints (token/context/request/time), and governs ROI tracking across all supported channels while composing existing tooling where appropriate.
 
-**Total Estimated Effort**: 344+ hours across 17 work items
+**Total Estimated Effort**: 388+ hours including composition-selection spikes (scope to be recalibrated after spike outcomes)
 
 ## Nirvana Optimization Mandate
 
@@ -37,12 +37,33 @@ This plan uses the same terminology as the architecture document:
 
 `model_cohort` is intentionally derived; it complements standard identifiers rather than replacing them.
 
+## Strategic Pivot: Compose Existing Tooling, Own the Control Plane
+
+Nirvana's differentiator is not replacing every memory/orchestration/observability product. Nirvana's differentiator is control-plane policy ownership:
+
+- Cross-channel and cross-model normalization
+- ROI forecast-vs-realized governance
+- Proposal ranking and promotion policy
+- Human-in-the-loop promotion and workflow integration
+
+Composition policy by phase:
+
+- **MVP**: local-first embedded defaults must run with zero mandatory external services
+- **MVP+1**: comprehensive adapter-based integration with external providers
+- **Long-term**: optimize selection, portability, and governance across composed providers
+
+Critical selection spikes:
+
+- [[026_cfl_mvp_composition_selection_spike]] - MVP local-first composition selection across memory/orchestration/telemetry-eval-cost
+- [[027_cfl_mvp_plus1_external_composition_spike]] - MVP+1 external provider composition and integration contracts
+
+Tool categories and candidate landscape include (non-exhaustive): Langfuse, LangSmith, Arize Phoenix, W&B Weave, AgentOps, Helicone, Mem0/OpenMemory, Zep/Graphiti, LlamaIndex, CrewAI, and similar solutions in each problem space.
+
 ## Milestone Progression
 
-- **MVP** (Phase 0-2): 108 hours → Lightweight default + VS Code extension + Codex/Copilot Chat coverage
-- **Short-term** (Phase 3-5): +84 hours = 192 hours → External AgeMem support + inline editor support + Nirvana dogfooding phase 1
-- **Mid-term** (Phase 6): +72 hours = 264 hours → CLI/cloud enablement + seamless external AgeMem alternative
-- **Long-term** (Phase 7): +80 hours = 344+ hours → Dynamic/extensible KPI framework + adjacent-market expansion options
+- **MVP** (Phase 0-5): local-first control-plane core with embedded defaults and no required external services
+- **MVP+1** (Phase 6): comprehensive external provider composition via adapters and contract-based fallbacks
+- **Long-term** (Phase 7): extensible KPI framework and advanced optimization/expansion initiatives
 
 ## Channel Coverage Requirements
 
@@ -57,7 +78,7 @@ This plan uses the same terminology as the architecture document:
 **Output channels (must remain portable):**
 
 - Lightweight local-first execution (default)
-- Existing external AgeMem services (local or remote)
+- Composed external providers (MVP+1) with local-first fallback
 
 **Model coverage policy (must be measurable and comparable):**
 
@@ -91,7 +112,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 ## Phase 1: MVP Core - Event Capture & Memory (80 hours)
 
-**Goal**: Implement core event capture and memory layer
+**Goal**: Implement core event capture and the local-first memory kernel with composition adapters
 
 **Work Items**:
 
@@ -101,9 +122,9 @@ Every optimization recommendation must also include per-model impact evidence fo
 **Deliverables**:
 
 - `capture-events` skill with assistant-provider adapters
-- JSONL episodic storage with 7-day TTL
-- Pattern detection from episode frequency analysis
-- Semantic memory tier with 30-day TTL
+- Embedded memory defaults (JSONL/SQLite) with 7-day/30-day retention controls
+- Pattern detection from episode frequency analysis owned by Nirvana
+- Memory provider adapter boundary for composed backends
 - Baseline snapshot capture for token/context/request/time by channel
 - Baseline snapshot capture for token/context/request/time by model cohort
 
@@ -115,7 +136,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 ## Phase 2: Recommendation Engine (60 hours)
 
-**Goal**: Implement skill recommendation workflow
+**Goal**: Implement Nirvana control-plane recommendation workflow
 
 **Work Items**:
 
@@ -126,7 +147,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 - `creating-skill` workflow skill
 - Hybrid routing matrix (enhance/create-pax/create-project/aspect/agents)
-- Confidence scoring for recommendations
+- Confidence scoring for recommendations across channel/model evidence
 - skill-creator delegation with proposal storage
 - Efficacy-opportunity classification (quality lift, acceptance lift, defect reduction)
 - Cross-channel recommendation scoring constraints (not single-assistant-provider only)
@@ -163,7 +184,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 ## Phase 4: Efficiency Optimization (48 hours)
 
-**Goal**: Add efficiency metrics, ROI forecasting, and portability outputs
+**Goal**: Add efficiency metrics, ROI forecasting, and provider-agnostic metric contracts
 
 **Work Items**:
 
@@ -178,7 +199,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 - Forecast vs realized ROI segmented by channel and model cohort
 - Skill harvesting recommendations ranked by efficiency
 - Progressive disclosure (summary/detail/evidence tiers)
-- External AgeMem output bridge (local/remote) with local-first fallback
+- Metric adapter contracts for MVP+1 external observability/eval/cost providers
 
 **Dependencies**: Phase 2 complete
 
@@ -214,9 +235,9 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 ---
 
-## Phase 6: Extended Provider Support (72 hours)
+## Phase 6: External Provider Composition (MVP+1, 72 hours)
 
-**Goal**: Full multi-assistant compatibility with CLI/cloud enablement
+**Goal**: Deliver comprehensive adapter-based integration with external providers across assistant, memory, orchestration, telemetry, eval, and cost domains.
 
 **Work Items**:
 
@@ -229,11 +250,13 @@ Every optimization recommendation must also include per-model impact evidence fo
 - Codex API adapter
 - Cursor extension integration
 - CLI adapters for Codex/Copilot/Claude-style workflows
-- Cloud deployment profile for hosted analysis and optional remote storage
+- Composed external memory provider integrations selected in MVP+1 spike
+- Composed external observability/eval/cost provider integrations selected in MVP+1 spike
+- Composed orchestration framework integrations selected in MVP+1 spike
 - Provider auto-detection logic
 - Assistant-provider-specific optimization
 - Model cohort tracking and per-model optimization profiles
-- Seamless local-first ↔ external AgeMem routing without workflow disruption
+- Seamless local-first fallback when external providers are unavailable
 
 **Dependencies**: Phase 0 complete (can run in parallel with Phase 1-5)
 
@@ -259,7 +282,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 - VS Code webview dashboard for insights
 - Research spike: Privacy-preserving cross-workspace learning
 - Adjustable/dynamic/extensible KPI framework (custom KPI registration + weighting)
-- AgeMem-backed expansion hypotheses for adjacent product and market opportunities
+- Composed-provider expansion hypotheses for adjacent product and market opportunities
 
 **Dependencies**: Phase 5 complete
 
@@ -271,9 +294,10 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 ### Critical Path
 
-1. **Phase 0** → 2. **Phase 1** → 3. **Phase 2** → 4. **Phase 3** → 5. **Phase 5**
+1. **Phase 0** → 2. **[[026_cfl_mvp_composition_selection_spike]]** → 3. **Phase 1** → 4. **Phase 2** → 5. **Phase 3** → 6. **Phase 5**
 
-Phases 4 and 6 can run in parallel with the critical path.
+Phase 4 can run in parallel after Phase 2.  
+**[[027_cfl_mvp_plus1_external_composition_spike]]** gates Phase 6 execution.
 
 ### MVP Checkpoint (Phase 0-2)
 
@@ -286,6 +310,8 @@ After completing Phase 2, the system delivers:
 - ✅ skill-creator delegation for approved proposals
 - ✅ Baseline capture for token/context/request/time metrics
 - ✅ Baseline capture segmented by channel and model cohort
+- ✅ MVP composition decisions documented (memory/orchestration/telemetry-eval-cost)
+- ✅ Local-first defaults validated with no mandatory external dependencies
 
 **Decision Point**: Validate MVP with real-world usage before proceeding to production features.
 
@@ -297,7 +323,7 @@ After completing Phase 4, the system adds:
 - ✅ PR feedback capture
 - ✅ Efficiency-based prioritization
 - ✅ ROI metrics for skill value
-- ✅ External AgeMem bridge (local/remote) with local-first fallback
+- ✅ Provider-agnostic telemetry/eval contracts ready for MVP+1 integrations
 - ✅ Inline editor channel support
 
 **Decision Point**: Evaluate efficiency improvements before investing in broader assistant-provider support.
@@ -382,7 +408,7 @@ Each phase includes:
 - ROI forecast generated before promotion for 95%+ of recommendations
 - ROI forecast segmented by model cohort for 90%+ of model-targeted recommendations
 - 80%+ of high-ROI recommendations accepted
-- External AgeMem output bridge operational with local-first fallback
+- External provider composition operational with local-first fallback
 
 ### Evolution Success (Phase 5)
 
@@ -394,14 +420,15 @@ Each phase includes:
 - Proposal acceptance frequency and usage frequency captured per model cohort
 - Forecast vs realized ROI error converges within ±20%
 
-### Multi-Assistant Success (Phase 6)
+### MVP+1 Success (Phase 6)
 
 - Works with 3+ AI assistants
 - Provider auto-detection 95%+ accurate
 - Assistant-provider-specific optimizations validated
 - Per-model optimization profiles validated for top model cohorts per provider
 - CLI and cloud profiles validated in production-like environments
-- Seamless switching between local-first and external AgeMem outputs
+- External provider categories integrated with contract-based adapters
+- Seamless switching between local-first defaults and external composed providers
 
 ## Related Documentation
 
@@ -412,6 +439,7 @@ Each phase includes:
 
 ## Revision History
 
+- **2026-03-02**: Pivoted to composition-first architecture; narrowed value focus to control-plane differentiators; added MVP and MVP+1 tool-selection spikes (including LlamaIndex/CrewAI-class options)
 - **2026-02-27**: Added explicit per-model optimization coverage (model-cohort baselines, scoring constraints, KPI segmentation, and success criteria)
 - **2026-02-27**: Reframed around Nirvana control-plane role; added cross-channel portability, KPI baseline/forecast governance, and phased MVP/short/mid/long rollout alignment
 - **2026-02-26**: Initial implementation plan (17 work items, 8 phases)

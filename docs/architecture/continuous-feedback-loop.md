@@ -8,16 +8,38 @@ audience: PAX contributors, AI assistant platform integrators
 
 ## Overview
 
-The Continuous Feedback Loop (CFL) is PAX's assistant-agnostic system for learning from development patterns, generating skill improvement recommendations, and evolving the skills library based on observed usage. Unlike reference implementations (e.g., `pax/evolution` which contains the auto-evolution reference), this is the **canonical PAX feedback system** designed to work across GitHub Copilot, Codex, Cursor, and other AI assistants.
+The Continuous Feedback Loop (CFL) is PAX's assistant-agnostic system for learning from development patterns, generating skill improvement recommendations, and evolving the skills library based on observed usage. Unlike reference implementations (for example, `pax/evolution`), this is the **canonical PAX feedback control plane** designed to work across GitHub Copilot, Codex, Cursor, and other AI assistants.
 
 ## Design Philosophy
 
-1. **Assistant-Agnostic**: Works with any AI assistant through provider adapters
-2. **Local-Only**: All data stays in workspace, no network calls, git-ignored storage
-3. **Human-Controlled**: Proposals require explicit approval before promotion
-4. **PAX-Native**: Uses existing skills, aspects, and workflow patterns
-5. **Continuous Background**: Non-blocking analysis during idle time
-6. **Evolving Signals**: Pattern detection rules improve over time
+1. **Assistant-Agnostic**: Works with any AI assistant through provider adapters.
+2. **Local-First Default**: MVP runs embedded and local with no required external services.
+3. **Composition-First**: Prefer integrating mature tools over rebuilding undifferentiated infrastructure.
+4. **Control-Plane Owned**: Nirvana owns policy logic, ranking, and governance semantics.
+5. **Human-Controlled**: Proposals require explicit approval before promotion.
+6. **PAX-Native**: Uses existing skills, aspects, and workflow patterns.
+7. **Continuous Background**: Non-blocking analysis during idle time.
+8. **Evolving Signals**: Pattern detection rules improve over time.
+
+## Scope Pivot: Compose Tools, Keep Differentiators In-House
+
+Nirvana should compose existing solutions in each problem space and keep these differentiators in-repo:
+
+- Cross-channel and cross-model normalization
+- ROI forecast-vs-realized governance
+- Recommendation ranking policy and evidence scoring
+- Human-in-the-loop promotion workflow integration
+
+Problem spaces and candidate ecosystems (non-exhaustive):
+
+- **Memory substrate**: embedded JSONL/SQLite defaults, Mem0/OpenMemory, Zep/Graphiti, LlamaIndex storage/index options
+- **Orchestration/runtime**: in-repo control-plane engine, LlamaIndex workflows, CrewAI, LangGraph, and similar frameworks
+- **Observability/evals/cost**: embedded telemetry, Langfuse, LangSmith, Arize Phoenix, W&B Weave, AgentOps, Helicone, OpenAI Evals, and similar tools
+
+Delivery boundary:
+
+- **MVP**: local-first embedded defaults + adapter interfaces
+- **MVP+1**: comprehensive external provider composition behind stable contracts
 
 ## System Architecture
 
@@ -63,7 +85,7 @@ The Continuous Feedback Loop (CFL) is PAX's assistant-agnostic system for learni
 
 - Abstract workspace signals into standardized events
 - Provide provider registry for assistant-specific adapters
-- Local-only, append-only event stream
+- Local-first append-only event stream by default
 - No blocking on main workflow
 
 **Event Schema**:
@@ -92,9 +114,15 @@ The Continuous Feedback Loop (CFL) is PAX's assistant-agnostic system for learni
 
 **Facade Pattern**: Similar to [[pull-request-tool/SKILL]] which delegates to backend implementations, `capture-events` delegates to provider-specific adapters.
 
+**Composition Boundary**:
+
+- Capture keeps a canonical event schema owned by Nirvana.
+- Provider adapters may compose external SDKs/APIs but must normalize to the canonical schema.
+- External integrations are optional for MVP and first-class in MVP+1.
+
 ### 2. Memory Layer
 
-**Storage Location**: `.vscode/pax-memory/` (git-ignored, local workspace)
+**Storage Location (MVP default)**: `.vscode/pax-memory/` (git-ignored, local workspace)
 
 **File Structure**:
 
@@ -114,6 +142,12 @@ The Continuous Feedback Loop (CFL) is PAX's assistant-agnostic system for learni
 - **Episodic**: Raw events, 7-day TTL, JSONL append-only
 - **Semantic**: Aggregated patterns, 30-day TTL, JSON structured
 - **Procedural**: Validated proposals, permanent (until promoted or rejected)
+
+**Composition Boundary**:
+
+- Nirvana owns memory semantics and tiering policies.
+- Backends are pluggable through adapter contracts (embedded defaults in MVP, external composed providers in MVP+1).
+- Data portability and fallback to local storage are mandatory.
 
 **Pattern Detection**:
 
@@ -475,7 +509,8 @@ This enables **continuous evolution of signal definitions** without human recali
 
 - Assistant-agnostic design using provider adapters
 - Integration with PAX skills, aspects, and workflows
-- Local-only storage in `.vscode/pax-memory/`
+- Local-first default storage in `.vscode/pax-memory/`
+- Composition-first integration with external providers behind adapters
 - **Human-controlled promotion via [[skill-creator]]** (critical distinction)
 - Efficiency-driven skill harvesting with cost/benefit analysis
 - Performance evaluation and signal evolution through validation feedback

@@ -1,6 +1,6 @@
 ---
 id: wi-008
-title: CFL Phase 4 - Implement Efficiency Metrics
+title: CFL Phase 4 - Implement Control Plane Efficiency and ROI Metrics
 type: work-item
 subtype: task
 lifecycle: active
@@ -10,22 +10,23 @@ estimated: 28
 links:
   depends_on:
     - "[[wi-004]]"
+    - "[[wi-026]]"
 ---
 
 ## Goal
 
-Implement efficiency metrics (LLM call count, execution time, context overhead) and ROI calculation to prioritize skill recommendations by automation value.
+Implement efficiency and ROI instrumentation owned by Nirvana's control plane, with adapter interfaces for composed telemetry and eval providers.
 
 ## Background
 
-Not all patterns are worth automating. The CFL should track efficiency metrics to identify high-value automation opportunities. ROI calculation: `(time_saved × frequency) / creation_cost` helps prioritize recommendations by impact.
+Not all patterns are worth automating. The control plane should normalize metrics across local-first defaults and external providers so ranking remains consistent regardless of backend selection.
 
 ## Tasks
 
-- [ ] Implement LLM call counter (track API calls per skill/workflow)
-- [ ] Add execution time tracking (start/end timestamps)
-- [ ] Implement context overhead measurement (token counts)
-- [ ] Create ROI calculation algorithm
+- [ ] Implement canonical metric schema (token/context/request/time + quality signals)
+- [ ] Add local-first metric collectors for MVP
+- [ ] Implement telemetry/eval provider adapter interface (for MVP+1 composition)
+- [ ] Create ROI calculation algorithm and forecast-vs-realized tracker
 - [ ] Add frequency tracking for patterns (how often does pattern occur?)
 - [ ] Implement time-saved estimation (comparison with manual workflow)
 - [ ] Create creation cost estimation (hours to implement skill)
@@ -34,10 +35,10 @@ Not all patterns are worth automating. The CFL should track efficiency metrics t
 
 ## Deliverables
 
-1. LLM call counter integration
-2. Execution time tracking
-3. Context overhead measurement
-4. ROI calculation algorithm
+1. Canonical metric schema and collectors
+2. Local-first instrumentation implementation
+3. Provider adapter contract for external telemetry/eval systems
+4. ROI forecast and realized tracking algorithm
 5. Frequency tracking for patterns
 6. Time-saved vs creation-cost comparison
 7. Efficiency-weighted recommendation ranking
@@ -46,10 +47,10 @@ Not all patterns are worth automating. The CFL should track efficiency metrics t
 
 ## Acceptance Criteria
 
-- [ ] LLM calls tracked per skill invocation
+- [ ] Canonical metrics captured for all recommendations regardless of backend
 - [ ] Execution time recorded with millisecond precision
 - [ ] Context overhead measured in tokens
-- [ ] ROI calculated for all recommendations
+- [ ] ROI forecast and realized values captured for all recommendations
 - [ ] Recommendations ranked by ROI (highest first)
 - [ ] Progressive disclosure preserves context (summary fits in 100 tokens)
 - [ ] High-ROI patterns prioritized (threshold configurable)
@@ -59,4 +60,5 @@ Not all patterns are worth automating. The CFL should track efficiency metrics t
 
 - See: [[docs/architecture/continuous-feedback-loop.md]] - Efficiency optimization
 - See: [[004_cfl_phase2_creating_skill_workflow]] - Recommendation engine
-- Reference: `pax/evolution` for efficiency metrics examples
+- See: [[026_cfl_mvp_composition_selection_spike]] - MVP composition decisions
+- See: [[027_cfl_mvp_plus1_external_composition_spike]] - MVP+1 provider composition

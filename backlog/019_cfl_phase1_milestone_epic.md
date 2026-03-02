@@ -12,6 +12,7 @@ links:
     - "[[wi-018]]"
     - "[[wi-002]]"
     - "[[wi-003]]"
+    - "[[wi-026]]"
 ---
 
 ## Goal
@@ -25,7 +26,7 @@ Phase 1 delivers the core CFL capture and memory layers and depends on Phase 0 i
 ## Tasks
 
 - [ ] Verify all scoped Phase 1 work items are complete with evidence
-- [ ] Validate milestone deliverables for capture and memory capabilities
+- [ ] Validate milestone deliverables for capture, memory, and composition boundaries
 - [ ] Record final milestone readiness decision
 
 ## Deliverables
@@ -43,3 +44,4 @@ Phase 1 delivers the core CFL capture and memory layers and depends on Phase 0 i
 - See: [[docs/how-to/continuous-feedback-loop-implementation-plan.md]] - Phase 1 scope and deliverables
 - See: [[002_cfl_phase1_capture_events_skill]] - Capture events implementation
 - See: [[003_cfl_phase1_memory_layer]] - Memory layer implementation
+- See: [[026_cfl_mvp_composition_selection_spike]] - MVP composition selection

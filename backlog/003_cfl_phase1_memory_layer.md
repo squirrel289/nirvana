@@ -1,6 +1,6 @@
 ---
 id: wi-003
-title: CFL Phase 1 - Implement Memory Layer with Pattern Detection
+title: CFL Phase 1 - Implement Control Plane Memory Kernel and Composition Adapters
 type: work-item
 subtype: task
 lifecycle: active
@@ -11,67 +11,62 @@ links:
   depends_on:
     - "[[wi-001]]"
     - "[[wi-002]]"
+    - "[[wi-026]]"
 ---
 
 ## Goal
 
-Implement the memory layer that transforms episodic events into patterns, organized across three tiers: episodic (7-day), semantic (30-day), and procedural (permanent proposals).
+Implement the selected MVP local-first memory kernel for Nirvana's control plane, plus the canonical memory contract and conformance tests that external providers must satisfy in MVP+1.
 
 ## Background
 
-The memory layer is the analysis engine of the CFL. It processes raw events from `episodes.jsonl` to detect patterns through frequency analysis, temporal clustering, and signal matching against the evolving signal catalog.
+The memory layer should preserve embedded local defaults for MVP while avoiding lock-in over time. This work item intentionally does not implement broad multi-backend external composition; that depth is deferred to MVP+1 planning and execution in [[027_cfl_mvp_plus1_external_composition_spike]].
 
 ## Tasks
 
-- [ ] Select persistent store(s)
-  - Identify options. Seed with below and consider other options.
-    - Avancedb + couchdb
-    - PostgreSQL + pgvector
-    - PostgreSQL (structured) + Redis (cache) + Qdrant (vectors)
-    - Qdrant
-    - FAISS
-    - FalkorDB
-    - Neo4j
-    - Raw files
-- [ ] Implement episodic memory tier (7-day TTL, JSONL storage)
-- [ ] Implement semantic memory tier (30-day TTL, pattern aggregation)
-- [ ] Implement procedural memory tier (permanent skill proposals)
-- [ ] Create pattern detection engine:
-  - Frequency analysis (repeated sequences)
-  - Temporal clustering (time-based grouping)
+- [ ] Implement the selected MVP local-first memory backend
+  - Episodic tier (7-day TTL)
+  - Semantic tier (30-day TTL)
+  - Procedural/proposal tier
+- [ ] Define canonical memory provider interface for composed backends
+  - Read/write contract for episodes, patterns, signals, and proposals
+  - Capability metadata (ttl support, vector search, graph traversal)
+- [ ] Implement adapter for the selected MVP backend
+- [ ] Implement contract/conformance test harness for future backends
+- [ ] Implement pattern detection engine owned by Nirvana control plane
+  - Frequency analysis
+  - Temporal clustering
   - Signal catalog matching
-- [ ] Implement pattern schema with metadata (frequency, last_seen, confidence)
-- [ ] Add pattern storage to `patterns.json` with versioning
-- [ ] Create signal catalog loader from `signals.json`
-- [ ] Implement background pattern analysis on idle
-- [ ] Add memory compaction/cleanup workflows
+- [ ] Add memory governance metadata
+  - Source backend
+  - Confidence inputs
+  - Retention and replay provenance
+- [ ] Implement compaction, cleanup, and replay utilities for selected MVP backend
+- [ ] Document deferred MVP+1 external migration work and handoff requirements to [[027_cfl_mvp_plus1_external_composition_spike]]
 
 ## Deliverables
 
-1. Capture considered and selected persistent storage options in an `architecture-decision-record`
-2. Memory layer implementation in `vscode-pax-feedback/src/memory/`
-3. Pattern detection algorithms (frequency, temporal, signal-based)
-4. Three-tier memory architecture with TTL management
-5. Pattern storage in `patterns.json`
-6. Signal catalog integration
-7. Background analysis scheduler
-8. Test suite for pattern detection accuracy
+1. Selected MVP local-first memory kernel implementation
+2. Canonical memory provider interface and selected-backend adapter
+3. Contract/conformance test harness for future backends
+4. Pattern detection engine (frequency, temporal, signal-based)
+5. Three-tier memory lifecycle with retention governance
+6. Test suite for selected backend adapter and pattern detection accuracy
 
 ## Acceptance Criteria
 
-- [ ] Architecure decision record created
-- [ ] Episodic memory stores events with 7-day TTL
-- [ ] Semantic memory aggregates patterns with 30-day TTL
-- [ ] Procedural memory persists skill proposals indefinitely
-- [ ] Pattern detection identifies repeated sequences (≥3 occurrences)
-- [ ] Temporal clustering groups related events within time windows
-- [ ] Signal catalog matching identifies known patterns
-- [ ] Patterns stored with confidence scores and metadata
-- [ ] Background analysis runs during idle periods (no blocking)
-- [ ] Test coverage ≥75% for pattern detection logic
+- [ ] Embedded MVP store runs fully local with no required external service
+- [ ] Canonical provider interface defined and documented for MVP+1 composition
+- [ ] Selected MVP backend passes contract/conformance test suite
+- [ ] Pattern detection engine behavior is backend-agnostic
+- [ ] Retention policy is enforced across episodic, semantic, and procedural tiers
+- [ ] MVP+1 migration and external backend implementation scope is explicitly deferred to [[027_cfl_mvp_plus1_external_composition_spike]]
+- [ ] Pattern metadata includes backend/source provenance for auditability
+- [ ] Test coverage ≥75% for adapter and detection logic
 
 ## Related Work
 
 - See: [[docs/architecture/continuous-feedback-loop.md]] - Memory architecture
 - See: [[002_cfl_phase1_capture_events_skill]] - Event capture dependency
-- Reference: `pax/evolution` for signal catalog examples
+- See: [[026_cfl_mvp_composition_selection_spike]] - MVP tool selection decisions
+- See: [[027_cfl_mvp_plus1_external_composition_spike]] - MVP+1 external composition scope

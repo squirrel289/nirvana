@@ -1,6 +1,6 @@
 ---
 id: wi-013
-title: CFL Phase 6 - Implement Codex and Cursor Providers
+title: CFL Phase 6 - Compose Codex and Cursor Integrations (MVP+1)
 type: work-item
 subtype: task
 lifecycle: active
@@ -11,22 +11,23 @@ links:
   depends_on:
     - "[[wi-001]]"
     - "[[wi-012]]"
+    - "[[wi-027]]"
 ---
 
 ## Goal
 
-Implement Codex and Cursor provider integrations to complete multi-assistant support for the CFL.
+Implement Codex and Cursor integrations via MVP+1 composition contracts and normalize signals into the control-plane schema.
 
 ## Background
 
-Codex (API-based) and Cursor (extension-based) require different integration approaches. Codex provider uses API polling and request/response analysis. Cursor provider integrates with Cursor's extension API similar to Copilot but with Cursor-specific features.
+Codex (API-based) and Cursor (extension-based) remain key providers, but implementation must follow composition-first boundaries selected in MVP+1 spikes instead of hard-coding bespoke pipelines.
 
 ## Tasks
 
 ### Codex Provider
 
 - [ ] Research OpenAI Codex API for event exposure
-- [ ] Implement Codex provider with API polling
+- [ ] Implement Codex integration adapter with API polling
 - [ ] Add request/response event capture
 - [ ] Implement API rate limiting and backoff
 - [ ] Create Codex-specific event schema
@@ -34,7 +35,7 @@ Codex (API-based) and Cursor (extension-based) require different integration app
 ### Cursor Provider
 
 - [ ] Research Cursor extension API
-- [ ] Implement Cursor provider extending base interface
+- [ ] Implement Cursor integration adapter extending base interface
 - [ ] Add Cursor-specific event capture
 - [ ] Implement Cursor's multi-model tracking
 - [ ] Create Cursor-specific optimizations
@@ -49,8 +50,8 @@ Codex (API-based) and Cursor (extension-based) require different integration app
 
 ## Deliverables
 
-1. Codex provider implementation
-2. Cursor provider implementation
+1. Codex integration adapter implementation
+2. Cursor integration adapter implementation
 3. Provider auto-detection updates
 4. Provider priority logic
 5. Cross-provider event normalization
@@ -73,4 +74,5 @@ Codex (API-based) and Cursor (extension-based) require different integration app
 
 - See: [[012_cfl_phase6_copilot_provider]] - Copilot provider reference
 - See: [[001_cfl_phase0_extension_scaffolding]] - Provider infrastructure
+- See: [[027_cfl_mvp_plus1_external_composition_spike]] - MVP+1 composition contracts
 - See: [[docs/architecture/continuous-feedback-loop.md]] - Provider matrix
