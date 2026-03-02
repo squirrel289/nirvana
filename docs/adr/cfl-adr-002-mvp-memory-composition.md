@@ -2,13 +2,13 @@
 "$schema": https://raw.githubusercontent.com/templjs/templ.js/main/schemas/frontmatter/by-type/document/current.json
 title: CFL ADR 002 - MVP Memory Composition Strategy
 lifecycle: active
+type: document
+subtype: adr
+status: approved
+status_comment: Accepted for MVP implementation planning and execution (`wi-026`, approved 2026-03-02).
 created: 2026-03-02
 audience: PAX contributors
 ---
-
-## Status
-
-Accepted for MVP implementation planning; pending ADR-set approval gate in `wi-026`.
 
 ## Context
 

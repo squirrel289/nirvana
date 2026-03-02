@@ -4,13 +4,25 @@ title: CFL MVP Spike - Compose Local-First Tooling for the Control Plane
 type: work-item
 subtype: task
 lifecycle: active
-status: in-progress
+status: closed
+status_reason: completed
 priority: high
 estimated: 20
+actual: 4
+completed_date: 2026-03-02
+assignee: ""
+test_results:
+  - timestamp: 2026-03-02T00:00:00.000Z
+    note: "Documentation-only closure: ADR set approval recorded and ADR statuses aligned; local verification completed against wi-026 acceptance criteria."
+notes:
+  - timestamp: 2026-03-02T00:00:00.000Z
+    note: "Finalized as a local planning/decision work item. No git remote is configured in this workspace, so PR linkage is unavailable."
 links:
   depends_on:
     - "[[wi-001]]"
     - "[[wi-002]]"
+commits:
+  9ca9724: "docs(cfl): align MVP composition ADRs and memory scope"
 ---
 
 ## Goal
@@ -63,7 +75,7 @@ This spike produces the evidence-backed tool selection and interface contracts f
 - [x] At least 3 options evaluated per problem space with evidence links
 - [x] LlamaIndex and CrewAI explicitly evaluated in scope
 - [x] Selected MVP defaults run without mandatory external services
-- [ ] ADR set approved for memory, orchestration, and telemetry/evals composition
+- [x] ADR set approved for memory, orchestration, and telemetry/evals composition
 - [x] Implementation backlog updated to reflect selected composition boundaries
 - [x] `wi-003` scope is narrowed to selected MVP defaults and contract tests only
 - [x] Deferred external/multi-backend depth is linked to [[027_cfl_mvp_plus1_external_composition_spike]]
