@@ -4,9 +4,23 @@ title: CFL Phase 2 - Integrate with skill-creator Delegation
 type: work-item
 subtype: task
 lifecycle: active
-status: ready
+status: ready-for-review
 priority: high
 estimated: 24
+actual: 4
+assignee: ""
+test_results:
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "pnpm test -- src/packages/core/src/recommendations/routing.test.ts src/packages/core/src/recommendations/confidence.test.ts src/packages/core/src/recommendations/engine.test.ts src/packages/core/src/recommendations/proposals.test.ts (15 tests passed)"
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "pnpm test:coverage -- src/packages/core/src/recommendations/routing.test.ts src/packages/core/src/recommendations/confidence.test.ts src/packages/core/src/recommendations/engine.test.ts src/packages/core/src/recommendations/proposals.test.ts (`recommendations/` statements 85.55%)"
+notes:
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Implemented proposal storage and lifecycle management (`pending/approved/rejected/implemented`) in `src/packages/core/src/recommendations/proposals.ts` with file-backed procedural memory (`proposals.json`)."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Added human-approval gating before skill-creator handoff, skill-creator parameter mapping, CLI review rendering, and proposal analytics tracking by recommendation type."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Moved to ready-for-review after validation and coverage evidence for delegation logic."
 links:
   depends_on:
     - "[[wi-004]]"
@@ -22,14 +36,14 @@ PAX requires explicit skill-creator delegation for all skill creation (never aut
 
 ## Tasks
 
-- [ ] Implement skill-creator delegation interface
-- [ ] Create proposal storage schema in procedural memory
-- [ ] Add proposal lifecycle states (pending, approved, rejected, implemented)
-- [ ] Implement approval workflow (interactive prompt or configuration)
-- [ ] Add skill-creator parameter mapping from recommendations
-- [ ] Create proposal review interface (CLI or VS Code webview)
-- [ ] Implement proposal→skill-creator handoff
-- [ ] Add proposal tracking and analytics
+- [x] Implement skill-creator delegation interface
+- [x] Create proposal storage schema in procedural memory
+- [x] Add proposal lifecycle states (pending, approved, rejected, implemented)
+- [x] Implement approval workflow (interactive prompt or configuration)
+- [x] Add skill-creator parameter mapping from recommendations
+- [x] Create proposal review interface (CLI or VS Code webview)
+- [x] Implement proposal→skill-creator handoff
+- [x] Add proposal tracking and analytics
 
 ## Deliverables
 
@@ -43,14 +57,14 @@ PAX requires explicit skill-creator delegation for all skill creation (never aut
 
 ## Acceptance Criteria
 
-- [ ] Recommendations stored as proposals (never auto-executed)
-- [ ] Proposals include full skill-creator parameters
-- [ ] Human approval required before skill-creator invocation
-- [ ] Approved proposals delegated to skill-creator correctly
-- [ ] Rejected proposals marked and logged (learning signal)
-- [ ] Proposal review interface shows rationale and evidence
-- [ ] Proposal analytics track approval rates by type
-- [ ] Test coverage ≥80% for delegation logic
+- [x] Recommendations stored as proposals (never auto-executed)
+- [x] Proposals include full skill-creator parameters
+- [x] Human approval required before skill-creator invocation
+- [x] Approved proposals delegated to skill-creator correctly
+- [x] Rejected proposals marked and logged (learning signal)
+- [x] Proposal review interface shows rationale and evidence
+- [x] Proposal analytics track approval rates by type
+- [x] Test coverage ≥80% for delegation logic
 
 ## Related Work
 

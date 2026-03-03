@@ -4,9 +4,7 @@ title: CFL Phase 2 - Implement Control Plane Recommendation Workflow
 type: work-item
 subtype: task
 lifecycle: active
-status: closed
-status_reason: completed
-completed_date: 2026-03-03
+status: ready-for-review
 priority: high
 estimated: 36
 actual: 4
@@ -23,6 +21,8 @@ notes:
     note: "Implemented `recommendations/` core module (routing, confidence scoring, memory similarity search, recommendation assembly) plus `skills/workflow/creating-skill/SKILL.md` workflow definition."
   - timestamp: 2026-03-03T00:00:00.000Z
     note: "Moved to ready-for-review after delivering all WI-004 acceptance criteria with passing tests and coverage evidence."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Temporarily held in ready-for-review while this branch prepares merged PR evidence linkage; closure state will be restored with pull request metadata."
 links:
   depends_on:
     - "[[wi-003]]"
