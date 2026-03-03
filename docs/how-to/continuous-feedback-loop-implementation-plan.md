@@ -184,6 +184,8 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 **Milestone**: CFL integrates with existing PAX workflows
 
+**Status**: 🟡 In Progress (`wi-006` ready-for-review; `wi-007` ready)
+
 ---
 
 ## Phase 4: Efficiency Optimization (48 hours)

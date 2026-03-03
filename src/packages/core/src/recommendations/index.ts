@@ -4,3 +4,4 @@ export * from './confidence';
 export * from './engine';
 export * from './proposals';
 export * from './proposals-review';
+export * from './work-item-finalization';

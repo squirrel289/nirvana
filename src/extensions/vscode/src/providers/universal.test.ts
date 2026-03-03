@@ -9,7 +9,7 @@ let onDidChangeHandler: ((uri: Uri) => void) | undefined;
 let onDidDeleteHandler: ((uri: Uri) => void) | undefined;
 let onDidChangeTextDocumentHandler:
   | ((event: {
-      document: { uri: Uri; languageId: string };
+      document: { uri: Uri; languageId: string; getText: () => string };
       contentChanges: unknown[];
     }) => void)
   | undefined;
@@ -46,7 +46,7 @@ vi.mock('vscode', () => ({
     onDidChangeTextDocument: vi.fn(
       (
         handler: (event: {
-          document: { uri: Uri; languageId: string };
+          document: { uri: Uri; languageId: string; getText: () => string };
           contentChanges: unknown[];
         }) => void
       ) => {
@@ -110,6 +110,7 @@ describe('UniversalProvider', () => {
       document: {
         uri,
         languageId: 'typescript',
+        getText: () => 'const x = 1;',
       },
       contentChanges: [{ text: 'x' }],
     });
@@ -136,6 +137,54 @@ describe('UniversalProvider', () => {
     expect(diagnosticsEvent?.metadata.warningCount).toBe(2);
 
     expect(provider.getEvents()).toEqual([]);
+  });
+
+  it('emits work_item.completed on non-terminal to completion status transitions', async () => {
+    const provider = new UniversalProvider(config, {} as never);
+    const backlogUri: Uri = {
+      fsPath: '/repo/backlog/006_cfl_phase3_work_item_finalization_triggers.md',
+      scheme: 'file',
+    };
+
+    await provider.activate();
+
+    onDidChangeTextDocumentHandler?.({
+      document: {
+        uri: backlogUri,
+        languageId: 'markdown',
+        getText: () => `---
+id: wi-006
+status: in-progress
+---
+`,
+      },
+      contentChanges: [{ text: 'status: in-progress' }],
+    });
+
+    onDidChangeTextDocumentHandler?.({
+      document: {
+        uri: backlogUri,
+        languageId: 'markdown',
+        getText: () => `---
+id: wi-006
+status: closed
+---
+`,
+      },
+      contentChanges: [{ text: 'status: closed' }],
+    });
+
+    const events = provider.getEvents();
+    const completionEvent = events.find(
+      (event) => event.event_type === 'work_item.completed'
+    );
+
+    expect(completionEvent).toBeDefined();
+    expect(completionEvent?.metadata.workItemId).toBe('wi-006');
+    expect(completionEvent?.metadata.previousStatus).toBe('in-progress');
+    expect(completionEvent?.metadata.currentStatus).toBe('closed');
+    expect(completionEvent?.metadata.path).toBe(backlogUri.fsPath);
+    expect(typeof completionEvent?.metadata.detectedAt).toBe('string');
   });
 
   it('starts and stops periodic capture idempotently', () => {
