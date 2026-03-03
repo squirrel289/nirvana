@@ -4,7 +4,9 @@ title: CFL Phase 2 - Integrate with skill-creator Delegation
 type: work-item
 subtype: task
 lifecycle: active
-status: ready-for-review
+status: closed
+status_reason: completed
+completed_date: 2026-03-03
 priority: high
 estimated: 24
 actual: 4
@@ -21,9 +23,13 @@ notes:
     note: "Added human-approval gating before skill-creator handoff, skill-creator parameter mapping, CLI review rendering, and proposal analytics tracking by recommendation type."
   - timestamp: 2026-03-03T00:00:00.000Z
     note: "Moved to ready-for-review after validation and coverage evidence for delegation logic."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Closed with merged implementation evidence from https://github.com/squirrel289/nirvana/pull/1."
 links:
   depends_on:
     - "[[wi-004]]"
+  pull_requests:
+    - "https://github.com/squirrel289/nirvana/pull/1"
 ---
 
 ## Goal
