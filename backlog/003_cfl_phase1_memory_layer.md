@@ -31,7 +31,9 @@ links:
     - "[[wi-002]]"
     - "[[wi-026]]"
 commits:
-  ba04afd: "feat(core): implement WI-003 memory contracts and local adapters"
+  0dab828: "feat(core): implement WI-003 memory contracts and local adapters"
+  84541be: "feat(core): complete WI-003 benchmark, routing, and replay flows"
+  a49131e: "docs(backlog): finalize WI-003 review metadata"
 ---
 
 ## Goal
