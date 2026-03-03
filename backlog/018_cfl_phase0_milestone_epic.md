@@ -4,10 +4,12 @@ title: CFL Milestone - Phase 0 Extension Scaffolding
 type: work-item
 subtype: epic
 lifecycle: active
-status: ready-for-review
+status: closed
+status_reason: completed
 priority: high
 estimated: 4
 actual: 1
+completed_date: 2026-03-03
 assignee: ""
 test_results:
   - timestamp: 2026-03-03T00:00:00.000Z
@@ -20,10 +22,12 @@ notes:
   - timestamp: 2026-03-03T00:00:00.000Z
     note: "Confirmed Phase 0 deliverables are documented in docs/how-to/continuous-feedback-loop-implementation-plan.md (Phase 0 section, status completed)."
   - timestamp: 2026-03-03T00:00:00.000Z
-    note: "Milestone readiness recorded; closure deferred until PR merge evidence is attached to this work item."
+    note: "Milestone closure recorded with merged implementation PR evidence inherited from [[wi-001]] and validated against backlog closure schema."
 links:
   depends_on:
     - "[[wi-001]]"
+  pull_requests:
+    - "https://github.com/templjs/templ.js/pull/1"
 ---
 
 ## Goal

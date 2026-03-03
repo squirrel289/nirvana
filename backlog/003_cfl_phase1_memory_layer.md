@@ -25,6 +25,8 @@ notes:
     note: "Completed WI-003 remaining scope: benchmark metrics (recall@k, MRR, p50/p95, ingest/update throughput, footprint), routing controls (`primary-first`/`fallback-first`), replay+compaction utilities, temporal+catalog pattern detection, and WI-027 handoff docs."
   - timestamp: 2026-03-03T00:00:00.000Z
     note: "Ready for review. GitHub push/PR creation is pending because this worktree has no configured git remote."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Closure audit completed: dependencies [[wi-001]], [[wi-002]], and [[wi-026]] are closed; implementation commits are present on `main`; no historical merged PR artifact was returned by `gh` commit→PR lookup."
 links:
   depends_on:
     - "[[wi-001]]"

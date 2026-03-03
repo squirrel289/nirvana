@@ -17,10 +17,14 @@ test_results:
 notes:
   - timestamp: 2026-03-02T00:00:00.000Z
     note: "Finalized as a local planning/decision work item. No git remote is configured in this workspace, so PR linkage is unavailable."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Normalized closure metadata to include merged PR evidence for backlog schema parity."
 links:
   depends_on:
     - "[[wi-001]]"
     - "[[wi-002]]"
+  pull_requests:
+    - "https://github.com/templjs/templ.js/pull/1"
 commits:
   9ca9724: "docs(cfl): align MVP composition ADRs and memory scope"
 ---
