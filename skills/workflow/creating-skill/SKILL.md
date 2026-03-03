@@ -29,7 +29,7 @@ Implement Nirvana's control-plane recommendation workflow without autonomous ski
 ## Routing Matrix
 
 - `enhance_existing`: overlap with existing skill >= 0.70.
-- `create_global_skill`: reusable cross-project pattern without strong overlap.
+- `create_pax_skill`: reusable cross-project pattern without strong overlap.
 - `create_project_skill`: workspace-specific pattern.
 - `update_aspect`: cross-cutting behavioral concern.
 - `update_agents`: agent routing/delegation concern.
