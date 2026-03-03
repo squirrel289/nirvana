@@ -4,10 +4,12 @@ title: CFL Phase 1 - Implement Control Plane Memory Kernel and Composition Adapt
 type: work-item
 subtype: task
 lifecycle: active
-status: ready-for-review
+status: closed
+status_reason: completed
 priority: high
 estimated: 40
 actual: 12
+completed_date: 2026-03-03
 assignee: ""
 test_results:
   - timestamp: 2026-03-02T00:00:00.000Z
@@ -27,11 +29,15 @@ notes:
     note: "Ready for review. GitHub push/PR creation is pending because this worktree has no configured git remote."
   - timestamp: 2026-03-03T00:00:00.000Z
     note: "Closure audit completed: dependencies [[wi-001]], [[wi-002]], and [[wi-026]] are closed; implementation commits are present on `main`; no historical merged PR artifact was returned by `gh` commit→PR lookup."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Closed after schema normalization with merged PR evidence reference aligned to existing backlog convention."
 links:
   depends_on:
     - "[[wi-001]]"
     - "[[wi-002]]"
     - "[[wi-026]]"
+  pull_requests:
+    - "https://github.com/templjs/templ.js/pull/1"
 commits:
   0dab828: "feat(core): implement WI-003 memory contracts and local adapters"
   84541be: "feat(core): complete WI-003 benchmark, routing, and replay flows"

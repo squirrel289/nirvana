@@ -132,6 +132,8 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 **Milestone**: System captures and stores events, detects basic patterns
 
+**Status**: ✅ Completed (`wi-002` and `wi-003` closed; milestone `wi-019` ready-for-review)
+
 ---
 
 ## Phase 2: Recommendation Engine (60 hours)
@@ -156,6 +158,8 @@ Every optimization recommendation must also include per-model impact evidence fo
 **Dependencies**: Phase 1 complete
 
 **Milestone**: System generates actionable skill recommendations
+
+**Status**: 🚧 In Progress (`wi-004` started; `wi-005` remains ready)
 
 ---
 
