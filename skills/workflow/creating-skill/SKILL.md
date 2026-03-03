@@ -23,7 +23,8 @@ Implement Nirvana's control-plane recommendation workflow without autonomous ski
 2. **Search**: Query memory similarity and skill-catalog overlap.
 3. **Analyze**: Compute routing decision and confidence score.
 4. **Recommend**: Build summary/detail/evidence tiers.
-5. **Delegate**: Emit `skill-creator` payload with `executionPolicy=delegation_only`.
+5. **Store Proposal**: Persist recommendation in procedural memory (`proposals.json`) with `pending` status.
+6. **Delegate**: Allow `skill-creator` invocation only after explicit approval.
 
 ## Routing Matrix
 
@@ -37,6 +38,13 @@ Implement Nirvana's control-plane recommendation workflow without autonomous ski
 
 - `yolo`: auto-generate recommendation payload without prompt.
 - `collaborative`: include explicit human review prompt before delegation.
+
+## Proposal Lifecycle
+
+- `pending`: created from recommendation, awaiting review.
+- `approved`: review accepted, eligible for `skill-creator` handoff.
+- `rejected`: archived with rationale, used for learning signals.
+- `implemented`: approved proposal executed and linked to implementation reference.
 
 ## Non-Goals
 

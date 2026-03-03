@@ -159,7 +159,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 **Milestone**: System generates actionable skill recommendations
 
-**Status**: 🚧 In Progress (`wi-004` ready-for-review with routing/scoring core delivered; `wi-005` remains ready)
+**Status**: ✅ Completed (`wi-004` and `wi-005` closed; phase-2 milestone closure tracked in `wi-020`)
 
 ---
 

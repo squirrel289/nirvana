@@ -53,7 +53,7 @@ Out of scope:
 
 - `events/`: canonical event schema and normalization helpers.
 - `analysis/`: detectors, thresholds, and pattern classifiers.
-- `recommendations/`: scoring, routing, confidence, memory similarity search, and proposal assembly.
+- `recommendations/`: scoring, routing, confidence, proposal lifecycle management, memory similarity search, and proposal assembly.
 - `metrics/`: token/context/request/time and quality KPI calculators.
 - `roi/`: baseline capture, forecasting, realized ROI tracking.
 - `governance/`: promotion gates, cross-model validation rules, audit trail.
@@ -92,6 +92,6 @@ Outputs:
 Phase 1 memory kernel and Phase 2 recommendation core scaffolding are now implemented in-repo:
 
 - `memory/`: provider contracts, adapters, routing, replay, benchmark, and conformance tests.
-- `recommendations/`: routing matrix, confidence scoring, interaction-mode handling, and delegation-only recommendation output.
+- `recommendations/`: routing matrix, confidence scoring, interaction-mode handling, delegation-only recommendation output, and proposal lifecycle (`pending`/`approved`/`rejected`/`implemented`) with analytics.
 
 The remaining roadmap items (workflow-trigger integration, ROI governance modules, and signal evolution loops) should continue to follow the phased implementation plan while preserving local-first defaults and human-controlled promotion.

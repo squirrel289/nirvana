@@ -23,10 +23,16 @@ notes:
     note: "Implemented `recommendations/` core module (routing, confidence scoring, memory similarity search, recommendation assembly) plus `skills/workflow/creating-skill/SKILL.md` workflow definition."
   - timestamp: 2026-03-03T00:00:00.000Z
     note: "Moved to ready-for-review after delivering all WI-004 acceptance criteria with passing tests and coverage evidence."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Temporarily held in ready-for-review while this branch prepares merged PR evidence linkage; closure state will be restored with pull request metadata."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Closure finalized with merged-PR evidence linkage via https://github.com/squirrel289/nirvana/pull/1."
 links:
   depends_on:
     - "[[wi-003]]"
     - "[[wi-026]]"
+  pull_requests:
+    - "https://github.com/squirrel289/nirvana/pull/1"
 commits:
   e79767d: "feat(core): implement wi-004 recommendation workflow core"
 ---
