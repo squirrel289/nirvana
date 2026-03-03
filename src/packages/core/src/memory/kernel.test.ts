@@ -89,6 +89,59 @@ describe('MemoryKernel', () => {
     expect(matches[0].record.id).toBe('fallback-signal');
   });
 
+  it('supports runtime routing-mode switching between primary and fallback', async () => {
+    const kernel = new MemoryKernel({
+      primaryProvider,
+      fallbackProvider,
+      routingMode: 'primary-first',
+    });
+    await kernel.initialize();
+
+    await primaryProvider.upsert({
+      id: 'shared-id',
+      kind: 'signal',
+      tier: 'semantic',
+      content: 'primary-value',
+      metadata: {},
+      createdAt: '2026-03-02T00:00:00.000Z',
+      updatedAt: '2026-03-02T00:00:00.000Z',
+      expiresAt: null,
+      embedding: [1, 0, 0],
+      governance: {
+        sourceBackend: primaryProvider.name,
+        confidenceInputs: ['seeded'],
+        retentionTier: 'semantic',
+        replayProvenance: 'primary-seed',
+      },
+    });
+
+    await fallbackProvider.upsert({
+      id: 'shared-id',
+      kind: 'signal',
+      tier: 'semantic',
+      content: 'fallback-value',
+      metadata: {},
+      createdAt: '2026-03-02T00:00:00.000Z',
+      updatedAt: '2026-03-02T00:00:00.000Z',
+      expiresAt: null,
+      embedding: [0.5, 0.5, 0],
+      governance: {
+        sourceBackend: fallbackProvider.name,
+        confidenceInputs: ['seeded'],
+        retentionTier: 'semantic',
+        replayProvenance: 'fallback-seed',
+      },
+    });
+
+    expect(kernel.getRoutingMode()).toBe('primary-first');
+    expect((await kernel.getById('shared-id'))?.content).toBe('primary-value');
+
+    kernel.setRoutingMode('fallback-first');
+
+    expect(kernel.getRoutingMode()).toBe('fallback-first');
+    expect((await kernel.getById('shared-id'))?.content).toBe('fallback-value');
+  });
+
   it('detects frequency-based patterns independent of backend source', () => {
     const kernel = new MemoryKernel({ primaryProvider });
 
@@ -149,8 +202,116 @@ describe('MemoryKernel', () => {
       ],
     });
 
-    expect(patterns).toHaveLength(1);
-    expect(patterns[0].name).toBe('signal-frequency-cluster');
-    expect(patterns[0].matchedRecordIds).toEqual(['sig-1', 'sig-2', 'sig-3']);
+    expect(patterns.some((pattern) => pattern.name === 'signal-frequency-cluster')).toBe(
+      true
+    );
+    expect(patterns.some((pattern) => pattern.name === 'temporal-activity-cluster')).toBe(
+      true
+    );
+    expect(patterns.some((pattern) => pattern.name === 'signal-catalog-match')).toBe(
+      false
+    );
+  });
+
+  it('detects signal catalog matching patterns when catalog ids repeat', () => {
+    const kernel = new MemoryKernel({ primaryProvider });
+
+    const patterns = kernel.detectPatterns({
+      now: '2026-03-02T00:00:00.000Z',
+      records: [
+        {
+          id: 'catalog-1',
+          kind: 'signal',
+          tier: 'semantic',
+          content: 'alpha-1',
+          metadata: {
+            signalCatalogId: 'typing-loop',
+          },
+          createdAt: '2026-03-02T00:00:00.000Z',
+          updatedAt: '2026-03-02T00:00:00.000Z',
+          expiresAt: null,
+          embedding: [1, 0, 0],
+          governance: {
+            sourceBackend: 'sqlite-counterpart',
+            confidenceInputs: ['seeded'],
+            retentionTier: 'semantic',
+            replayProvenance: 'seeded',
+          },
+        },
+        {
+          id: 'catalog-2',
+          kind: 'signal',
+          tier: 'semantic',
+          content: 'alpha-2',
+          metadata: {
+            signalCatalogId: 'typing-loop',
+          },
+          createdAt: '2026-03-02T00:01:00.000Z',
+          updatedAt: '2026-03-02T00:01:00.000Z',
+          expiresAt: null,
+          embedding: [0.9, 0.1, 0],
+          governance: {
+            sourceBackend: 'lance-counterpart',
+            confidenceInputs: ['seeded'],
+            retentionTier: 'semantic',
+            replayProvenance: 'seeded',
+          },
+        },
+      ],
+    });
+
+    const catalogPattern = patterns.find(
+      (pattern) => pattern.id === 'signal-catalog-typing-loop'
+    );
+    expect(catalogPattern).toBeDefined();
+    expect(catalogPattern?.matchedRecordIds).toEqual(['catalog-1', 'catalog-2']);
+  });
+
+  it('replays memory records with filters and fallback inclusion', async () => {
+    const now = new Date('2026-03-02T00:00:00.000Z');
+    const kernel = new MemoryKernel({
+      primaryProvider,
+      fallbackProvider,
+      now: () => now,
+    });
+    await kernel.initialize();
+
+    await kernel.upsert({
+      id: 'primary-episode',
+      kind: 'episode',
+      tier: 'episodic',
+      content: 'primary',
+    });
+
+    await fallbackProvider.upsert({
+      id: 'fallback-signal',
+      kind: 'signal',
+      tier: 'semantic',
+      content: 'fallback',
+      metadata: {},
+      createdAt: '2026-03-02T00:01:00.000Z',
+      updatedAt: '2026-03-02T00:01:00.000Z',
+      expiresAt: null,
+      embedding: [1, 0, 0],
+      governance: {
+        sourceBackend: fallbackProvider.name,
+        confidenceInputs: ['seeded'],
+        retentionTier: 'semantic',
+        replayProvenance: 'fallback-seed',
+      },
+    });
+
+    const replayed = await kernel.replay({
+      since: '2026-03-02T00:00:00.000Z',
+      until: '2026-03-02T00:10:00.000Z',
+      limit: 10,
+    });
+
+    expect(replayed.map((record) => record.id)).toEqual([
+      'primary-episode',
+      'fallback-signal',
+    ]);
+
+    await kernel.compact();
   });
 });

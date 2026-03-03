@@ -4,19 +4,27 @@ title: CFL Phase 1 - Implement Control Plane Memory Kernel and Composition Adapt
 type: work-item
 subtype: task
 lifecycle: active
-status: in-progress
+status: ready-for-review
 priority: high
 estimated: 40
-actual: 6
+actual: 12
 assignee: ""
 test_results:
   - timestamp: 2026-03-02T00:00:00.000Z
     note: "pnpm test -- src/packages/core/src/memory/conformance.test.ts src/packages/core/src/memory/kernel.test.ts (11 passed)"
   - timestamp: 2026-03-02T00:00:00.000Z
     note: "pnpm test -- src/extensions/vscode/src/providers/universal.test.ts src/extensions/vscode/src/providers/facade.test.ts (5 passed)"
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "pnpm test -- src/packages/core/src/memory/conformance.test.ts src/packages/core/src/memory/kernel.test.ts src/packages/core/src/memory/benchmark.test.ts (15 passed)"
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "pnpm test:coverage -- src/packages/core/src/memory/conformance.test.ts src/packages/core/src/memory/kernel.test.ts src/packages/core/src/memory/benchmark.test.ts (overall statements 85.46%)"
 notes:
   - timestamp: 2026-03-02T00:00:00.000Z
     note: "Started WI-003 implementation on branch feature/wi-003-memory-layer-exec. Delivered canonical memory provider contract, SQLite/Lance local adapters, shared conformance suite, and initial benchmark harness."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Completed WI-003 remaining scope: benchmark metrics (recall@k, MRR, p50/p95, ingest/update throughput, footprint), routing controls (`primary-first`/`fallback-first`), replay+compaction utilities, temporal+catalog pattern detection, and WI-027 handoff docs."
+  - timestamp: 2026-03-03T00:00:00.000Z
+    note: "Ready for review. GitHub push/PR creation is pending because this worktree has no configured git remote."
 links:
   depends_on:
     - "[[wi-001]]"
@@ -49,15 +57,15 @@ This item still avoids broad external multi-provider rollout; deeper hosted/comp
 - [x] Implement SQLite counterpart adapter for MVP memory contract
 - [x] Implement LanceDB adapter for MVP memory contract
 - [x] Implement contract/conformance test harness shared by SQLite and LanceDB adapters
-- [ ] Implement A/B benchmark harness for SQLite counterpart vs LanceDB
+- [x] Implement A/B benchmark harness for SQLite counterpart vs LanceDB
   - Recall@k and ranking quality on seeded scenarios
   - Query latency (p50/p95)
   - Ingest/update throughput
   - Local disk/storage footprint
-- [ ] Select and document MVP default behavior from A/B results
+- [x] Select and document MVP default behavior from A/B results
   - Define primary backend/default path
   - Define fallback path and switching controls
-- [ ] Implement pattern detection engine owned by Nirvana control plane
+- [x] Implement pattern detection engine owned by Nirvana control plane
   - Frequency analysis
   - Temporal clustering
   - Signal catalog matching
@@ -65,8 +73,8 @@ This item still avoids broad external multi-provider rollout; deeper hosted/comp
   - Source backend
   - Confidence inputs
   - Retention and replay provenance
-- [ ] Implement compaction, cleanup, and replay utilities for selected MVP default and fallback path
-- [ ] Document deferred MVP+1 external migration work and handoff requirements to [[027_cfl_mvp_plus1_external_composition_spike]]
+- [x] Implement compaction, cleanup, and replay utilities for selected MVP default and fallback path
+- [x] Document deferred MVP+1 external migration work and handoff requirements to [[027_cfl_mvp_plus1_external_composition_spike]]
 
 ## Deliverables
 
@@ -81,22 +89,24 @@ This item still avoids broad external multi-provider rollout; deeper hosted/comp
 
 ## Acceptance Criteria
 
-- [ ] Semantic retrieval is implemented and required in MVP workflows
+- [x] Semantic retrieval is implemented and required in MVP workflows
 - [x] SQLite counterpart and LanceDB both run fully local with no required external service
 - [x] SQLite counterpart and LanceDB both pass canonical contract/conformance tests
-- [ ] A/B benchmark evidence is recorded for recall@k, latency, throughput, and footprint
-- [ ] MVP default backend behavior is selected and justified from benchmark evidence
-- [ ] Fallback path between SQLite counterpart and LanceDB is documented and testable
-- [ ] Pattern detection engine behavior is backend-agnostic
+- [x] A/B benchmark evidence is recorded for recall@k, latency, throughput, and footprint
+- [x] MVP default backend behavior is selected and justified from benchmark evidence
+- [x] Fallback path between SQLite counterpart and LanceDB is documented and testable
+- [x] Pattern detection engine behavior is backend-agnostic
 - [x] Retention policy is enforced across episodic, semantic, and procedural tiers
-- [ ] MVP+1 migration and external backend implementation scope is explicitly deferred to [[027_cfl_mvp_plus1_external_composition_spike]]
+- [x] MVP+1 migration and external backend implementation scope is explicitly deferred to [[027_cfl_mvp_plus1_external_composition_spike]]
 - [x] Pattern metadata includes backend/source provenance for auditability
-- [ ] Test coverage >=75% for adapters, retrieval behavior, and detection logic
+- [x] Test coverage >=75% for adapters, retrieval behavior, and detection logic
 
 ## Related Work
 
 - See: [[docs/architecture/continuous-feedback-loop.md]] - Memory architecture
 - See: [[docs/how-to/cfl-mvp-composition-selection-matrix.md]] - MVP composition decisions
+- See: [[docs/how-to/cfl-wi-003-memory-benchmark-report.md]] - WI-003 A/B benchmark evidence and default selection
+- See: [[docs/how-to/cfl-wi-003-mvp1-handoff.md]] - WI-003 deferred MVP+1 handoff requirements
 - See: [[002_cfl_phase1_capture_events_skill]] - Event capture dependency
 - See: [[026_cfl_mvp_composition_selection_spike]] - MVP tool selection decisions
 - See: [[027_cfl_mvp_plus1_external_composition_spike]] - MVP+1 external composition scope
