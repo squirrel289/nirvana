@@ -184,7 +184,7 @@ Every optimization recommendation must also include per-model impact evidence fo
 
 **Milestone**: CFL integrates with existing PAX workflows
 
-**Status**: 🟡 In Progress (`wi-006` ready-for-review; `wi-007` ready)
+**Status**: 🟡 In Progress (`wi-006` and `wi-007` ready-for-review; phase-3 milestone `wi-021` pending closure evidence)
 
 ---
 
