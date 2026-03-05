@@ -7,6 +7,9 @@ lifecycle: active
 status: ready
 priority: high
 estimated: 4
+notes:
+  - timestamp: 2026-03-05T00:00:00.000Z
+    note: "Milestone gate audit: cannot advance because dependencies are not closed (`wi-020` is `ready`; `wi-006` and `wi-007` are `ready-for-review`). Closure policy remains merged-PR evidence for completed closure states."
 links:
   depends_on:
     - "[[wi-020]]"
