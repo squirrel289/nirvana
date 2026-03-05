@@ -22,11 +22,68 @@ export interface RecommendationMemoryQuery {
 }
 
 export interface TelemetryEvidence {
+  tokenCount?: number;
+  contextTokens?: number;
+  contextWindowTokens?: number;
+  requestCount?: number;
+  elapsedTimeMs?: number;
+  qualityScore?: number;
   tokenDeltaPct?: number;
   contextDeltaPct?: number;
   requestDeltaPct?: number;
   elapsedTimeDeltaPct?: number;
   qualityLiftPct?: number;
+}
+
+export interface CanonicalMetricSnapshot {
+  channel: string;
+  modelCohort: string;
+  tokenCount: number;
+  contextTokens: number;
+  contextWindowTokens: number;
+  requestCount: number;
+  elapsedTimeMs: number;
+  qualityScore: number;
+  capturedAt: string;
+}
+
+export interface CanonicalMetricRecord extends CanonicalMetricSnapshot {
+  contextOverheadTokens: number;
+  tokenEfficiency: number;
+  requestEfficiency: number;
+  elapsedTimePerRequestMs: number;
+}
+
+export interface RoiForecast {
+  roi: number;
+  frequency: number;
+  projectedMinutesSaved: number;
+  timeSavedMinutes: number;
+  creationCostMinutes: number;
+}
+
+export interface RoiRealized {
+  proposalId: string;
+  roi: number;
+  projectedMinutesSaved: number;
+  timeSavedMinutes: number;
+  requestSavings: number;
+  tokenSavings: number;
+  creationCostMinutes: number;
+  capturedAt: string;
+}
+
+export interface RecommendationEfficiencyEvidence {
+  canonical: CanonicalMetricRecord;
+  forecast: RoiForecast;
+  realized: RoiRealized;
+  highRoi: boolean;
+}
+
+export interface ProgressiveDisclosureTiers {
+  summary: string;
+  detail: string[];
+  evidence: string[];
 }
 
 export interface RecommendationInput {
@@ -40,6 +97,7 @@ export interface RecommendationInput {
   affectsAgentRouting?: boolean;
   affectsAspectBehavior?: boolean;
   estimatedTimeSavedMinutes?: number;
+  estimatedCreationCostMinutes?: number;
   evidenceIds?: string[];
   skillOverlaps?: SkillOverlapEvidence[];
   memoryQuery?: RecommendationMemoryQuery;
@@ -93,6 +151,8 @@ export interface RecommendationResult {
   summary: {
     recommendationType: RecommendationType;
     confidence: number;
+    roiForecast: number;
+    highRoi: boolean;
     useCase: string;
     interactionMode: InteractionMode;
     requiresUserInput: boolean;
@@ -102,6 +162,7 @@ export interface RecommendationResult {
     proposedChanges: string[];
     nextSteps: string[];
     userPrompt?: string;
+    disclosure: ProgressiveDisclosureTiers;
   };
   evidence: {
     patternId: string;
@@ -112,6 +173,7 @@ export interface RecommendationResult {
     memoryMatches: MemorySimilarityEvidence[];
     skillMatches: SkillCatalogMatch[];
     telemetry: TelemetryEvidence | null;
+    efficiency: RecommendationEfficiencyEvidence;
   };
   delegation: {
     executor: 'skill-creator';

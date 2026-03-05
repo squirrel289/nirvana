@@ -22,6 +22,7 @@ export function computeConfidenceScore(
   options: {
     channelCoverageTarget?: number;
     modelCoverageTarget?: number;
+    efficiencyForecastRoi?: number;
   } = {}
 ): ConfidenceScore {
   const uniqueChannels = new Set(input.channels).size;
@@ -33,7 +34,9 @@ export function computeConfidenceScore(
   const patternStrength = clamp(input.occurrences / 5);
   const channelCoverage = clamp(uniqueChannels / channelCoverageTarget);
   const modelCoverage = clamp(uniqueModelCohorts / modelCoverageTarget);
-  const efficiencySignal = clamp((input.estimatedTimeSavedMinutes ?? 0) / 60);
+  const timeSavedSignal = clamp((input.estimatedTimeSavedMinutes ?? 0) / 60);
+  const roiSignal = clamp((options.efficiencyForecastRoi ?? 0) / 2);
+  const efficiencySignal = Math.max(timeSavedSignal, roiSignal);
 
   const bestOverlap =
     input.skillOverlaps?.reduce((best, candidate) => {

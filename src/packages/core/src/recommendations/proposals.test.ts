@@ -127,7 +127,7 @@ describe('ProposalService', () => {
 
     const rendered = await service.renderReviewInterface();
 
-    expect(rendered).toContain('ID | Status | Type | Confidence | Use Case');
+    expect(rendered).toContain('ID | Status | Type | Confidence | ROI | Use Case');
     expect(rendered).toContain('enhance_existing');
     expect(rendered).toContain('Automate recurring review-driven skill updates');
   });

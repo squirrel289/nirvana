@@ -1,6 +1,10 @@
 import { routeRecommendation } from './routing';
 import { computeConfidenceScore } from './confidence';
 import {
+  buildProgressiveDisclosure,
+  buildRecommendationEfficiencyEvidence,
+} from './efficiency';
+import {
   MemorySimilarityEvidence,
   RecommendationEngineContext,
   RecommendationInput,
@@ -146,6 +150,7 @@ function buildRationale(
     `Detected pattern ${input.patternId} ${input.occurrences} times across ${input.channels.length} channel(s).`,
     `Routing decision: ${result.routing.type} (${result.routing.reason})`,
     `Confidence ${result.confidence.value.toFixed(2)} combines pattern strength (${result.confidence.breakdown.patternStrength.toFixed(2)}), channel coverage (${result.confidence.breakdown.channelCoverage.toFixed(2)}), and model coverage (${result.confidence.breakdown.modelCoverage.toFixed(2)}).`,
+    `Forecast ROI ${result.evidence.efficiency.forecast.roi.toFixed(2)} from projected ${result.evidence.efficiency.forecast.projectedMinutesSaved.toFixed(1)} minute savings at creation cost ${result.evidence.efficiency.forecast.creationCostMinutes.toFixed(1)} minutes.`,
   ];
 
   if (memoryMatches.length > 0) {
@@ -170,9 +175,11 @@ export async function generateSkillRecommendation(
   context: RecommendationEngineContext = {}
 ): Promise<RecommendationResult> {
   const routing = routeRecommendation(input);
+  const efficiency = buildRecommendationEfficiencyEvidence(input);
   const confidence = computeConfidenceScore(input, routing, {
     channelCoverageTarget: context.channelCoverageTarget,
     modelCoverageTarget: context.modelCoverageTarget,
+    efficiencyForecastRoi: efficiency.forecast.roi,
   });
 
   const [memoryMatches, skillMatches] = await Promise.all([
@@ -189,6 +196,8 @@ export async function generateSkillRecommendation(
     summary: {
       recommendationType: routing.type,
       confidence: confidence.value,
+      roiForecast: efficiency.forecast.roi,
+      highRoi: efficiency.highRoi,
       useCase: input.useCase,
       interactionMode: input.interactionMode,
       requiresUserInput,
@@ -200,6 +209,11 @@ export async function generateSkillRecommendation(
       userPrompt: requiresUserInput
         ? 'Collaborative mode: review recommendation details and approve delegation to skill-creator.'
         : undefined,
+      disclosure: {
+        summary: '',
+        detail: [],
+        evidence: [],
+      },
     },
     evidence: {
       patternId: input.patternId,
@@ -210,6 +224,7 @@ export async function generateSkillRecommendation(
       memoryMatches,
       skillMatches,
       telemetry: input.telemetryEvidence ?? null,
+      efficiency,
     },
     delegation: {
       executor: 'skill-creator',
@@ -227,6 +242,19 @@ export async function generateSkillRecommendation(
   result.detail.rationale = buildRationale(input, result, memoryMatches, skillMatches);
   result.detail.proposedChanges = createProposedChanges(result);
   result.detail.nextSteps = createNextSteps(result);
+  result.detail.disclosure = buildProgressiveDisclosure({
+    recommendationType: result.summary.recommendationType,
+    confidence: result.summary.confidence,
+    roiForecast: result.summary.roiForecast,
+    highRoi: result.summary.highRoi,
+    useCase: result.summary.useCase,
+    channels: result.evidence.channels,
+    modelCohorts: result.evidence.modelCohorts,
+    occurrences: result.evidence.occurrences,
+    episodeIds: result.evidence.episodeIds,
+    rationale: result.detail.rationale,
+    maxSummaryTokens: 100,
+  });
 
   return result;
 }

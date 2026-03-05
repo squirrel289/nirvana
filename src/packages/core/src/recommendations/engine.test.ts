@@ -95,6 +95,11 @@ describe('generateSkillRecommendation', () => {
     expect(recommendation.detail.rationale.length).toBeGreaterThan(0);
     expect(recommendation.detail.proposedChanges.length).toBeGreaterThan(0);
     expect(recommendation.evidence.telemetry).not.toBeNull();
+    expect(recommendation.summary.roiForecast).toBeGreaterThan(0);
+    expect(recommendation.evidence.efficiency.forecast.roi).toBe(
+      recommendation.summary.roiForecast
+    );
+    expect(recommendation.detail.disclosure.summary.split(/\s+/).length).toBeLessThanOrEqual(100);
   });
 
   it('adds a review prompt in collaborative mode', async () => {
