@@ -26,6 +26,8 @@ links:
   depends_on:
     - "[[wi-004]]"
     - "[[wi-026]]"
+  pull_requests:
+    - "https://github.com/squirrel289/nirvana/pull/2"
 ---
 
 ## Goal
